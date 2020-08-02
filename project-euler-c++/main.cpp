@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include "problemFunctions.h"	// function declarations
+#include "primeFunctions.h"
 using namespace std;
 
 void solve(vector<int> problems);
@@ -8,11 +9,14 @@ int solve(int problem);
 
 int main() {
 
+	cout << "Generating primes..." << endl;
+	cout << "Last prime: " << prime::generatePrimes(100000000).back() << endl;
+	cout << "Primes generated" << endl;
 	// solved problems
 	vector<int> solvedProblems = { 64, 81, 82, 83, 66 };
 	
 	// current problem
-	cout << solve(243);
+	// cout << solve(243);
 }
 
 void solve(vector<int> problems) {
