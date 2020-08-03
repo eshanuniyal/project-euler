@@ -1,3 +1,4 @@
+import DataStructures.IntSet
 
 function generatePrimes(bound::Int)::Vector{Int}
     # primitive, brute force algorithm
@@ -27,9 +28,34 @@ function generatePrimes(bound::Int)::Vector{Int}
     return primes
 end
 
+function sieve(bound::Int)::Vector{Int}
+    primeCandidates::IntSet = IntSet(2:bound)
+    primes::Vector{Int} = []
+    k::Int = 1
+    while length(primeCandidates) > 0
+        p::Int = popfirst!(primeCandidates)
+        push!(primes, p)
+        setdiff!(primeCandidates, p:p:bound)
+    end
+    println(length(primes))
+    return primes
+end
+
+function eratosthenes(n)
+    primes = fill(true,n)
+    primes[1] = false
+    for p = 2:n
+        primes[p] || continue
+        for i = 2:div(n,p)
+            primes[p*i] = false
+        end
+    end
+    find(primes)
+end
+
 function main()
     println("Generating primes...")
-    println(length(generatePrimes(10^1)))
+    println(length(eratosthenes(10^8)))
     println("Primes generated")
 end
 
