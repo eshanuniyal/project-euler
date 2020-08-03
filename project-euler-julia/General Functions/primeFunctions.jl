@@ -28,6 +28,7 @@ function generatePrimes(bound::Int)::Vector{Int}
     return primes
 end
 
+#=
 function sieve(bound::Int)::Vector{Int}
     primeCandidates::IntSet = IntSet(2:bound)
     primes::Vector{Int} = []
@@ -40,23 +41,10 @@ function sieve(bound::Int)::Vector{Int}
     println(length(primes))
     return primes
 end
-
-function eratosthenes(n)
-    primes = fill(true,n)
-    primes[1] = false
-    for p = 2:n
-        primes[p] || continue
-        for i = 2:div(n,p)
-            primes[p*i] = false
-        end
-    end
-    find(primes)
-end
+=#
 
 function main()
-    println("Generating primes...")
-    println(length(eratosthenes(10^8)))
-    println("Primes generated")
+    println("Last prime; ", generatePrimes(10^7)[end])
 end
 
 main()
