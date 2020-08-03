@@ -5,23 +5,26 @@ using namespace std;
 namespace prime {
 	vector<int> generatePrimes(int primeBound) {
 		// generates primes in range [2, primeBound] by brute force algorithm
-		vector<int> primes;		// vector of all primes upto and including largest factor
+		
+		// guaranteed upper bound on number of primes <= primeBound
+		int nPrimeBound = ceil(1.25506 * primeBound / log(primeBound));
+		vector<int> primes = { 2 };		// vector of all primes upto and including largest factor
+		primes.reserve(nPrimeBound);	// reserving storage
 
-		// iterating over [2, primeBound]
-		for (int n = 2; n <= primeBound; n++) {
+		// iterating over odd numbers in [3, primeBound]
+		for (int n = 3; n <= primeBound; n += 2) {
 			bool primeFound = true;		// we assume we have a prime until and unless we find a prime factor
-			int maxPrimeFactor = ceil(sqrt(n));
+			int maxPrimeFactor = floor(sqrt(n));
 
 			// searching for prime factor
 			for (int prime : primes) {
+				if (prime > maxPrimeFactor) {
+					primes.push_back(n);
+					break;
+				}
 				if (n % prime == 0)
-					primeFound = false;
-				if (prime > maxPrimeFactor || !primeFound)
 					break;
 			}
-			// no factor of i found -> i is a prime
-			if (primeFound)
-				primes.push_back(n);
 		}
 		return primes;
 	}
