@@ -9,12 +9,11 @@ int solve(int problem);
 
 int main() {
 
-	cout << "Generating primes..." << endl;
-	cout << "Last prime: " << prime::generatePrimes(100000000).back() << endl;
-	cout << "Primes generated" << endl;
 	// solved problems
 	vector<int> solvedProblems = { 64, 81, 82, 83, 66 };
-	
+	solve(82);
+
+
 	// current problem
 	// cout << solve(243);
 }
@@ -35,7 +34,7 @@ int solve(int problem) {
 		case 81:
 			return minPathSumTwoWays("Problem Resources/problems81,82,83.txt", 80);
 		case 82:
-			return minPathSumThreeWays("Problem Resources/problems81,82,83.txt", 80);
+			return minPathSumThreeWays("Problem Resources/problems81,82,83test.txt", 5);
 		case 83:
 			return minPathSumFourWays("Problem Resources/problems81,82,83.txt", 80);
 		case 66:

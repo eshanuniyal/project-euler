@@ -1,4 +1,7 @@
 import DataStructures.IntSet
+# using TimerOutputs
+
+to = TimerOutput()
 
 function generatePrimes(bound::Int)::Vector{Int}
     # primitive, brute force algorithm
@@ -10,9 +13,9 @@ function generatePrimes(bound::Int)::Vector{Int}
     sizehint!(primes, nPrimeBound)  # preallocating storage
 
     # iterating over odd numbers
-    for num = 3:2:bound
+    for num in 3:2:bound
         # maximum prime factorn num can have must be <= root(num)
-        maxPrimeFactor::Int = floor(sqrt(num))
+        maxPrimeFactor::Int = isqrt(num)\flo
         # iterating over primes
         for prime in primes
             # no prime factors -> num is prime
@@ -28,23 +31,22 @@ function generatePrimes(bound::Int)::Vector{Int}
     return primes
 end
 
-#=
-function sieve(bound::Int)::Vector{Int}
-    primeCandidates::IntSet = IntSet(2:bound)
-    primes::Vector{Int} = []
-    k::Int = 1
-    while length(primeCandidates) > 0
-        p::Int = popfirst!(primeCandidates)
-        push!(primes, p)
-        setdiff!(primeCandidates, p:p:bound)
+function sieve(n::Int)::Vector{Int}
+    numbers::Vector{Bool} = fill(true,n)
+    numbers[1] = false
+    for i in 2:isqrt(n)
+        if numbers[i]
+            for j = 2*i:i:n
+            numbers[j] = false
+            end
+        end
     end
-    println(length(primes))
+    primes = findall(x -> x, numbers)
     return primes
 end
-=#
 
 function main()
-    println("Last prime; ", generatePrimes(10^7)[end])
+    @time sieve(10^4)
 end
 
 main()

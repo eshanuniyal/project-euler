@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <iostream>
 #include "auxFunctions.h"	// loadMatrix
 using namespace std;
 
@@ -34,11 +35,17 @@ int minPathSumThreeWays(string fileName, int dim) {
 			bestMinPathSum = currentMinPathSum;
 	}
 
-	/*for (vector<int> rowSums : minPathSums) {
+	for (vector<int> rowSums : upMinPathSums) {
 		for (int elemSum : rowSums)
 			cerr << elemSum << " ";
 		cerr << endl;
-	}*/
+	}
+	cerr << endl;
+	for (vector<int> rowSums : downMinPathSums) {
+		for (int elemSum : rowSums)
+			cerr << elemSum << " ";
+		cerr << endl;
+	}
 
 	return bestMinPathSum;
 }
