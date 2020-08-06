@@ -1,10 +1,11 @@
-import DataStructures   # LinkedLists
+using DataStructures   # LinkedLists
+import Base.delete!
 # using TimerOutputs
 
 # to = TimerOutput()
 
 function generatePrimes(bound::Int)::Vector{Int}
-    # primitive, brute force algorithm
+    """primitive, brute force algorithm"""
     πₙ::Int = ceil(1.25506 * bound / log(bound))
         # a guaranteed, close upper-bound on the number of primes <= bound
 
@@ -18,23 +19,20 @@ function generatePrimes(bound::Int)::Vector{Int}
         maxPrimeFactor::Int = isqrt(num)\flo
         # iterating over primes
         for prime in primes
-            # no prime factors -> num is prime
+            # no prime factors ⇒ num is prime
             if (prime > maxPrimeFactor)
                 push!(primes, num)
                 break
             end
-            if num % prime == 0
-                break
-            end
+            # prime factor found ⇒ break
+            num % prime == 0 && break
         end
     end
     return primes
 end
 
 function sieve(n::Int)::Vector{Int}
-    # primitive sieve of Eratosthenes
-    # primes up to 10^8 in ~2 seconds
-
+    """ primitive sieve of Eratosthenes; generates primes up to 10^8 in ~2 seconds """
     πₙ = Int(ceil(1.25506 * n / log(n)))
         # a guaranteed, close upper-bound on the number of primes <= bound
 
@@ -63,8 +61,61 @@ function sieve(n::Int)::Vector{Int}
     return primes
 end
 
+function delete!(l::MutableLinkedList{Int}, r::StepRange{Int})
+    """delete! function overloaded for sieveLinkedList"""
+    cVal = first(r)
+    node = l.node.next
+
+    while cVal ≤ last(r)
+        # finding next node ≥ cVal
+        while node.data < cVal
+            node = node.next
+        end
+        # matching node found -> removing node
+        if node.data == cVal
+            prev = node.prev
+            next = node.next
+            prev.next = next
+            next.prev = prev
+            l.len -= 1
+        end
+        cVal += step(r)
+    end
+
+    return l
+
+end
+
+function sieveLinkedList(n::Int)::Vector{Int}
+    """ primitive sieve of eratosthenes; this version uses a linked list
+    and has better time complexity, but much larger constants; the other algorithm
+    therefore works better
+    """
+
+    πₙ = Int(ceil(1.25506 * n / log(n)))
+        # a guaranteed, close upper-bound on the number of primes <= bound
+
+    # initialising primes vector
+    primes::Vector{Int} = []
+    sizehint!(primes, πₙ)
+
+    numbers = MutableLinkedList{Int}()
+    for k in n:-1:2
+        pushfirst!(numbers, k)
+    end
+
+    while !isempty(numbers)
+        p = popfirst!(numbers)
+        push!(primes, p)
+        delete!(numbers, 2*p:p:n)
+    end
+
+    return primes
+end
+
+
 function main()
-    @time println(length(sieve(10^8)))
+    @time sieve(10^9)
 end
 
 main()
