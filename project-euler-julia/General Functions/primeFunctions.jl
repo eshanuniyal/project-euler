@@ -15,8 +15,8 @@ function generatePrimes(bound::Int)::Vector{Int}
 
     # iterating over odd numbers
     for num in 3:2:bound
-        # maximum prime factorn num can have must be <= root(num)
-        maxPrimeFactor::Int = isqrt(num)\flo
+        # maximum prime factor num can have must be <= root(num)
+        maxPrimeFactor::Int = isqrt(num)
         # iterating over primes
         for prime in primes
             # no prime factors ⇒ num is prime
@@ -57,9 +57,39 @@ function sieve(n::Int)::Vector{Int}
         end
     end
 
+    # inserting all remaining primes
+    for k in isqrt(n) + 1 : n
+        if numbers[k]
+            push!(primes, k)
+        end
+    end
+
     # return primes vector
     return primes
 end
+
+function insertNextPrime(primes::Vector{Int})
+    """insert next prime"""
+    k = last(primes) + 1
+    while true
+        # maximum prime factor num can have must be <= root(num)
+        maxPrimeFactor::Int = isqrt(k)
+        # iterating over primes
+        for prime in primes
+            # no prime factors k num is prime
+            if (prime > maxPrimeFactor)
+                push!(primes, k)
+                return
+            end
+            # prime factor found ⇒ not a prime ⇒ increment k and break
+            if k % prime == 0
+                k += 1
+                break
+            end
+        end
+    end
+end
+
 
 function delete!(l::MutableLinkedList{Int}, r::StepRange{Int})
     """delete! function overloaded for sieveLinkedList"""
@@ -115,7 +145,7 @@ end
 
 
 function main()
-    @time sieve(10^9)
+    @time sieve(10^8)
 end
 
 main()
