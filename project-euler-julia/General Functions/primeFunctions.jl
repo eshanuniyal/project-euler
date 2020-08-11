@@ -4,6 +4,8 @@ import Base.delete!
 
 # to = TimerOutput()
 
+module primes
+
 function generatePrimes(bound::Int)::Vector{Int}
     """primitive, brute force algorithm"""
     πₙ::Int = ceil(1.25506 * bound / log(bound))
@@ -70,6 +72,13 @@ end
 
 function insertNextPrime(primes::Vector{Int})
     """insert next prime"""
+
+    # base case: primes is empty
+    if length(primes) == 0
+        push!(primes, 2)
+        return
+    end
+
     k = last(primes) + 1
     while true
         # maximum prime factor num can have must be <= root(num)
@@ -90,6 +99,11 @@ function insertNextPrime(primes::Vector{Int})
     end
 end
 
+end
+
+module primesExtra
+"""non-optimal / non-practical prime-generating functions that
+(in theory) have better time complexity """
 
 function delete!(l::MutableLinkedList{Int}, r::StepRange{Int})
     """delete! function overloaded for sieveLinkedList"""
@@ -143,6 +157,7 @@ function sieveLinkedList(n::Int)::Vector{Int}
     return primes
 end
 
+end
 
 function main()
     @time sieve(10^8)
