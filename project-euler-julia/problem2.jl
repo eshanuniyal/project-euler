@@ -4,19 +4,12 @@
 function findEvenFibonacciSum(bound::Int)::Int
 
     ∑ = 0  # initialising sum variable
+    Fᵢ₋₁, Fᵢ = 0, 1  # initialising base cases
 
-    # initialising base cases
-    Fᵢ₋₁, Fᵢ = 0, 1
     # iterating until we reach bound 
     while Fᵢ₋₁ + Fᵢ ≤  bound
-        # generating next Fibonacci number
-        Fᵢ₊₁ = Fᵢ₋₁ + Fᵢ
-        # adding to total if even
-        if Fᵢ₊₁ % 2 == 0
-            ∑ += Fᵢ₊₁
-        end
-        # updating state variables
-        Fᵢ₋₁, Fᵢ = Fᵢ, Fᵢ₊₁
+        Fᵢ₋₁, Fᵢ = Fᵢ, Fᵢ₋₁ + Fᵢ  # generating next Fibonacci number and updating state variables
+        Fᵢ % 2 == 0 && (∑ += Fᵢ)  # adding to total if even
     end
 
     return ∑
