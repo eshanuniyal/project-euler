@@ -9,14 +9,9 @@ function minPathSum(sr::Int, sc::Int, matrix::Matrix{Int},  minPathSums::Matrix{
     # minPathSums = matrix of minimal path sums from (1, 1) to (i, j)
 
 	# out of bounds, can't travel -> return "infinity"
-	if !checkbounds(Bool, matrix, sr, sc)
-		return typemax(Int)	# sentinel for infinity
-	end
-
+	!checkbounds(Bool, matrix, sr, sc) && return typemax(Int)	# sentinel for infinity
     # base case: already found minimal path
-    if minPathSums[sr, sc] ≠ nothing
-        return minPathSums[sr, sc]
-	end
+    minPathSums[sr, sc] ≠ nothing && return minPathSums[sr, sc]
 
     # not at end point -> find minimal path from right element and below element (if they exist)
 		# if they don't exist, line 10 returns infinity

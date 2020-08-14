@@ -2,7 +2,6 @@
 # 5 August 2020
 
 using DelimitedFiles # readdlm
-using PrettyTables # debugging
 
 # creating enumeration for directions
 @enum Direction begin
@@ -19,7 +18,7 @@ function minPathSum(sr::Int, sc::Int, dir::Direction, matrix::Matrix{Int},  minP
 	if dir == RIGHT && nothing ∉ minPathSums[:, sr, sc]
 		return minimum(minPathSums[:, sr, sc])
 	# base case: travel is limited to two directions (up/right or down/right) and already found minimal path up/down
-elseif dir ≠ RIGHT && minPathSums[dir, sr, sc] ≠ nothing
+	elseif dir ≠ RIGHT && minPathSums[dir, sr, sc] ≠ nothing
         return minPathSums[dir, sr, sc]
 	end
 
