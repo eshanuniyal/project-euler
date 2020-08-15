@@ -1,5 +1,6 @@
 # Julia Solution to Project Euler Problem 82
 # 5 August 2020
+# Runtime: ~10⁻² seconds
 
 using DelimitedFiles # readdlm
 
@@ -10,9 +11,21 @@ end
 
 Base.to_index(dir::Direction)::Int = Int(dir)
 
-function minPathSum(sr::Int, sc::Int, dir::Direction, matrix::Matrix{Int},  minPathSums::Array{Union{Nothing, Int}, 3})::Int
-    # (sr, sc) = index of starting element
-    # matrix = matrix of entries
+"""
+	minPathSum(sr, sc, dir, matrix, minPathSums)
+
+Recursive function which returns the sum of the minimal path from `matrix[sr, sc]` to `matrix[end, end]`
+	going only down, up and to the right and excluding the element that came before [sr, sc] 
+	(as indicated) by `dir`.
+
+# Arguments
+- `sr::Int`: row number of starting element
+- `sc::Int`: column number of starting element
+- `dir::Direction`: enum type representing direction we came to `matrix[sr, sc]` from; `UP = 1`, `DOWN = 2`, `RIGHT = 3`
+- `matrix::Matrix{Int}`: matrix representing a grid of integers
+- `minPathSums::Array{Union{Int, Nothing}, 3}`: matrix representing minimal path sums such that `minPathSums[d, i, j]` for `d` ∈ [UP, DOWN] is the sum of the minimal path from `matrix[i, j]` to `matrix[end, end]` starting in direction `d` or right if known, and `nothing` otherwise
+"""
+function minPathSum(sr::Int, sc::Int, dir::Direction, matrix::Matrix{Int},  minPathSums::Array{Union{Nothing, Int}, 3})
 
 	# base case: can travel in any direction, and already found minimal path in any direction
 	if dir == RIGHT && nothing ∉ minPathSums[:, sr, sc]
@@ -59,8 +72,13 @@ function minPathSum(sr::Int, sc::Int, dir::Direction, matrix::Matrix{Int},  minP
 
 end
 
+"""
+	minPathSumTwoWays(fileName)
+
+Returns sum of the minimum path from the top-left element of a grid defined in `fileName` 
+to the bottom-right element moving only up, down, and right.
+"""
 function minPathSumThreeWays(fileName::String)::Int
-    # return minimum path sum across matrix defined in fileName moving up, down, and right
 
     # extracting matrix
     matrix::Matrix{Int} = readdlm(fileName, ',', Int, '\n')
@@ -89,8 +107,6 @@ function minPathSumThreeWays(fileName::String)::Int
 	return bestMinPathSum
 end
 
-function main()
-    @time println("Problem 82: ", minPathSumThreeWays("Problem Resources\\problems81,82,83.txt"))
-end
 
-main()
+# function call
+@time println("Problem 82: ", minPathSumThreeWays("Problem Resources\\problems81,82,83.txt"))

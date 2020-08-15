@@ -1,14 +1,16 @@
 # Julia Solution to Project Euler Problem 1
 # 5 August 2020
+# Runtime: ~10⁻² seconds
 
-function findSumOfMultiples(factors::Vector{Int}, bound::Int)::Int
-    # generic solution; takes input factors and returns the sum of all numbers
-    # in [1, bound] that are divisible by at least one factor in factors
+"""
+    multiplesSum(factors, bound)
+
+Return the sum of all numbers in [1, `bound`] that are divisible by at least 
+one factor in `factors`.
+"""
+function multiplesSum(factors::Vector{Int}, bound::Integer)    
     return [k for k ∈ 1:bound - 1 if any(f-> k % f == 0, factors)] |> sum
 end
 
-function main()
-    @time println("Problem 1: ", findSumOfMultiples([3, 5], 1000))
-end
-
-main()
+# function call
+@time println("Problem 1: ", multiplesSum([3, 5], 1000))

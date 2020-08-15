@@ -1,9 +1,21 @@
 # Julia Solution to Project Euler Problem 83
 # 5 August 2020
+# Runtime: ~10⁻³ seconds
 
 using DelimitedFiles # readdlm
 using DataStructures # PriorityQueue
 
+"""
+	Node
+
+# Fields
+- `r::Int`: number of row of Node
+- `c::Int`: number of column of Node
+- `val::Int`: value stored in node
+- `adjNodes::Vector{Int}`: vector of Nodes adjacent to Node
+- `shortestPath::Int`: shortest path to Node from top-left Node
+- `heuristic::Int`: Heuristic for shortest path from top-left Node to bottom-right Node through Node
+"""
 mutable struct Node
 	r::Int
 	c::Int
@@ -13,7 +25,12 @@ mutable struct Node
 	heuristic::Int
 end
 
-function generateNodeMatrix(numMatrix::Matrix{Int})::Matrix{Node}
+"""
+	generateNodeMatrix(numMatrix)
+
+Return a matrix of Nodes generated from matrix of integers `numMatrix`.
+"""
+function generateNodeMatrix(numMatrix::Matrix{Int})
 
 	nRows, nCols = first(size(numMatrix)), last(size(numMatrix))
 	nodeMatrix = Matrix{Node}(undef, nRows, nCols)
@@ -48,7 +65,14 @@ function generateNodeMatrix(numMatrix::Matrix{Int})::Matrix{Node}
 	return nodeMatrix
 end
 
-function minPathSumFourWays(fileName::String)::Int
+
+"""
+	minPathSumTwoWays(fileName)
+
+Returns sum of the minimum path from the top-left element of a grid defined in `fileName` 
+to the bottom-right element moving in any direction.
+"""
+function minPathSumFourWays(fileName::String)
     # return minimum path sum across matrix defined in fileName moving up, down, and right
 
     # extracting matrix
@@ -76,8 +100,5 @@ function minPathSumFourWays(fileName::String)::Int
 	return nodeMatrix[end, end].shortestPath
 end
 
-function main()
-    @time println("Problem 83: ", minPathSumFourWays("Problem Resources\\problems81,82,83test.txt"))
-end
-
-main()
+# function call
+@time println("Problem 83: ", minPathSumFourWays("Problem Resources\\problems81,82,83test.txt"))

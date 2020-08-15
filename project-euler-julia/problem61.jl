@@ -1,21 +1,37 @@
 # Julia Solution to Project Euler Problem 61
 # 6 August 2020
+# Runtime: ~10⁻² seconds
 
-function figurate(n::Int, k::Int)::Int
-    # returning nth figurate number of sides k
-        # note: ÷ represents integer division
+
+"""
+    figurate(n, k)
+
+Return the $(L"n^{th}") figurate/polygonal number of sides `k` for `k` ∈ [3,8].
+"""
+function figurate(n::Integer, k::Integer)
     k == 3 && return (n * (n + 1)) ÷ 2
     k == 4 && return  n * n
     k == 5 && return (n * (3n - 1)) ÷ 2
     k == 6 && return  n * (2n - 1)
     k == 7 && return (n * (5n - 3)) ÷ 2
     k == 8 && return  n * (3n - 2)
+    # k not in valid range [3, 8]: throw error
+    throw(ArgumentError("k = $k out of bounds; required k ∈ [3, 8]."))
 end
 
+"""
+    findOrderedSet(usedNums, usedSides, numbers)
+
+Returns the longest possible extension of `usedNums` that does not repeat sides and is cyclic
+(except, possibly, from the last number to the first number)
+
+# Parameter list
+- `usedNums::Vector{Int}`: a vector of used integers in cyclic order
+- `usedSides::Vector{Int}`: a vector of the number of sides of each (figurate) number in `usedNums`
+- `numbers::Matrix{Set{Int}}`: a matrix of pre-generated polygonal numbers, 
+    where `numbers[i, j]` is a set of four-digit figurate numbers of number of sides `i` with first two digits `j`
+"""
 function findOrderedSet(usedNums::Vector{Int}, usedSides::Vector{Bool}, numbers::Matrix{Set{Int}})::Vector{Int}
-    # find remaining ordered set of numbers
-        # usedNums = numbers already used
-        # usedSides = sides already used
 
     # finding starting digits of next number
     nextNumStart = last(usedNums) % 100
@@ -45,9 +61,13 @@ function findOrderedSet(usedNums::Vector{Int}, usedSides::Vector{Bool}, numbers:
 
 end
 
-function findOrderedSetSum()::Int
-    # returns the sum of the only ordered set of six cyclic 4-digit numbers
-    # for which each polygonal type is represented by a different number in the set
+"""
+    findOrderedSetSum()
+
+Returns the sum of the only ordered set of six cyclic 4-digit numbers for which each
+polygonal type is represented by a different number in the set.
+"""
+function findOrderedSetSum()
 
     # generating all 4-digit figurate numbers
 
@@ -89,11 +109,7 @@ function findOrderedSetSum()::Int
             return sum(set)
         end
     end
-
 end
 
-function main()
-    @time println("Problem 61: ", findOrderedSetSum())
-end
-
-main()
+# function call
+@time println("Problem 61: ", findOrderedSetSum())
