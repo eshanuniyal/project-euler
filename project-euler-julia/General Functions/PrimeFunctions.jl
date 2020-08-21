@@ -4,7 +4,8 @@ import Base.delete!
 
 # to = TimerOutput()
 
-module primes
+module PrimeFunctions
+export generatePrimes, sieve, insertNextPrime
 
 function generatePrimes(bound::Int)::Vector{Int}
     """primitive, brute force algorithm"""
