@@ -1,6 +1,6 @@
 # Julia Solution to Project Euler Problem 1
 # 5 August 2020
-# Runtime: ~10⁻² seconds
+# Runtime: ~10⁻⁵ seconds
 
 """
     multiplesSum(factors, bound)
@@ -12,5 +12,5 @@ function multiplesSum(factors::Vector{Int}, bound::Integer)
     return [k for k ∈ 1:bound - 1 if any(f-> k % f == 0, factors)] |> sum
 end
 
-# function call
-@time println("Problem 1: ", multiplesSum([3, 5], 1000))
+# function call and benchmarking
+@btime multiplesSum([3, 5], 1000)

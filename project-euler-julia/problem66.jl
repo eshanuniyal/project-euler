@@ -35,5 +35,5 @@ function diophantineEquation(bound::Integer)
     return optimalD;
 end
 
-# function call
-@time println(diophantineEquation(1000))
+# function call and benchmark
+@btime diophantineEquation(1000)

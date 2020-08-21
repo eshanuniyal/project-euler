@@ -1,6 +1,6 @@
 # Project Euler Problem 64 (https://projecteuler.net/problem=64)
 # July 20, 2020
-# Runtime: 10⁻² seconds
+# Runtime: 10⁻⁵ seconds
 
 import AuxFunctions: findContinuedFraction
 
@@ -24,4 +24,4 @@ function oddPeriodSquareRoots(bound::Integer)
 end
 
 # function call
-@time println(oddPeriodSquareRoots(10000))
+@btime oddPeriodSquareRoots(10000)

@@ -1,12 +1,11 @@
 # Julia Solution to Project Euler Problem 61
 # 6 August 2020
-# Runtime: ~10⁻² seconds
-
+# Runtime: ~10⁻³ seconds
 
 """
     figurate(n, k)
 
-Return the $(L"n^{th}") figurate/polygonal number of sides `k` for `k` ∈ [3,8].
+Return the `n`th figurate/polygonal number of sides `k` for `k` ∈ [3,8].
 """
 function figurate(n::Integer, k::Integer)
     k == 3 && return (n * (n + 1)) ÷ 2
@@ -111,5 +110,5 @@ function findOrderedSetSum()
     end
 end
 
-# function call
-@time println("Problem 61: ", findOrderedSetSum())
+# function call and benchmarking
+@btime findOrderedSetSum()

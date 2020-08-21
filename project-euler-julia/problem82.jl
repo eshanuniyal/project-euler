@@ -1,6 +1,6 @@
 # Julia Solution to Project Euler Problem 82
 # 5 August 2020
-# Runtime: ~10⁻² seconds
+# Runtime: ~10⁻³ seconds
 
 using DelimitedFiles # readdlm
 
@@ -108,5 +108,5 @@ function minPathSumThreeWays(fileName::String)::Int
 end
 
 
-# function call
-@time println("Problem 82: ", minPathSumThreeWays("Problem Resources\\problems81,82,83.txt"))
+# function call and benchmarking
+@btime minPathSumThreeWays("Problem Resources\\problems81,82,83.txt")

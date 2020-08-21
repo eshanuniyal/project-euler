@@ -1,6 +1,6 @@
 # Julia Solution to Project Euler Problem 2
 # 5 August 2020
-# Runtime: ~10⁻² seconds
+# Runtime: ~10⁻⁸ seconds
 
 """
     evenFibonacciSum(bound)
@@ -21,5 +21,5 @@ function evenFibonacciSum(bound::Integer)
     return ∑
 end
 
-# function call
-@time println("Problem 2: ", evenFibonacciSum(4 * 10^6))
+# function call and benchmarking
+@btime evenFibonacciSum(4 * 10^6)

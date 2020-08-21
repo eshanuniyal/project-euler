@@ -1,6 +1,6 @@
 # Julia Solution to Project Euler Problem 94
 # 21 August 2020
-# Runtime: ~10⁻³ seconds
+# Runtime: ~10⁻⁴ seconds
 
 import AuxFunctions: findMinimalPellSolution
 
@@ -22,7 +22,7 @@ We rewrite this in terms of x and y:
     h = y;  x = (3α ∓ 1)/2 ⟹ 2x ± 4 = 3α ± 3 ⟹ b = α ± 1 = (2x ± 4)/3 (⟹ α = (2x ± 1)/3)
         ⟹ area = bh/2 = (2x ± 4)/3 * y/2 = y(x ± 2)/3
 So, for a solution (x, y) (where x and y are integers) to the equation x² - 3y² = 1,
-    we can have a triangles of side α = (2x ± 1)/3, α, α ± 1. 
+    we can have a triangles of side α = (2x ± 1)/3, α, α ± 1 and perimeter 2x ± 2
 If area = y(x ± 2)/3 and α = (2x ± 1)/3 are both integral, we have an almost equilateral triangle.
 """
 
@@ -33,16 +33,13 @@ Return the sum of all almost equilateral triangles that have perimeter ≤ `peri
 """
 function almostEquilateralTriangles(perimeterBound)
     
+    # finding fundamental solution to Pell's Equation
     x₁ = findMinimalPellSolution(3)  
-        # returns minimal x solving Pell's equation for n = 3
     y₁ = isqrt((x₁^2 - 1) ÷ 3)
-    """
-    (x₁, y₁) give a fundamental solution.
-    Once a fundamental solution (x₁, y₁) is found, all remaining solutions may be found
-    from the recurrence relations xₖ₊₁ = x₁xₖ + ny₁yₖ, yₖ₊₁ = x₁yₖ + y₁xₖ
-    (source: https://en.wikipedia.org/wiki/Pell%27s_equation#Fundamental_solution_via_continued_fractions)
-    """
-    # recurrence relations for solutions (xₖ₊₁, yₖ₊₁)
+    
+    # Once a fundamental solution (x₁, y₁) is found, all remaining solutions may be found
+    # from the recurrence relations xₖ₊₁ = x₁xₖ + ny₁yₖ, yₖ₊₁ = x₁yₖ + y₁xₖ
+    # (source: https://en.wikipedia.org/wiki/Pell%27s_equation#Fundamental_solution_via_continued_fractions)
     xₖ₊₁(xₖ, yₖ) = x₁*xₖ + 3y₁*yₖ
     yₖ₊₁(xₖ, yₖ) = x₁*yₖ + y₁*xₖ
 
@@ -51,7 +48,7 @@ function almostEquilateralTriangles(perimeterBound)
 
     Σ = 0  # sum of perimeters
     
-    # iterating over all solutions (that give perimeter less than perimeterBound)
+    # iterating over all solutions (that give perimeter ≤ perimeterBound)
     while 2xₖ + 2 ≤ perimeterBound
 
         # checking triangle with sides α = (2xₖ + 1)/3, α, α + 1
@@ -59,8 +56,13 @@ function almostEquilateralTriangles(perimeterBound)
         # checking triangle with sides α = (2xₖ - 1)/3, α, α - 1
         ((2xₖ - 1) % 3 == 0 && (yₖ * (xₖ - 2)) % 3 == 0) && (Σ += 2xₖ - 2)
 
-        # to find next solution, we use the recurrence relations
+        # finding next solution
         xₖ, yₖ = xₖ₊₁(xₖ, yₖ), yₖ₊₁(xₖ, yₖ)
+    end
+
+    # edge case: only smaller triangle from last solution gives perimter ≤ perimeterBound
+    if 2xₖ - 2 ≤ perimeterBound
+        ((2xₖ - 1) % 3 == 0 && (yₖ * (xₖ - 2)) % 3 == 0) && (Σ += 2xₖ - 2)
     end
 
     return Σ
@@ -103,5 +105,5 @@ function almostEquilateralTrianglesBruteForce(perimeterBound)
     return ∑
 end
 
-# function call
-@time println(almostEquilateralTriangles(10^9))
+# function call and benchmarking
+@btime almostEquilateralTriangles(10^9)

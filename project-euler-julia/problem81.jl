@@ -60,4 +60,4 @@ function minPathSumTwoWays(fileName::String)::Int
 end
 
 # function call
-@time println(minPathSumTwoWays("Problem Resources\\problems81,82,83.txt"))
+@btime minPathSumTwoWays("Problem Resources\\problems81,82,83.txt")
