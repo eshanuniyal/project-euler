@@ -34,7 +34,7 @@ function generatePrimes(bound::Int)::Vector{Int}
     return primes
 end
 
-function sieve(n::Int)::Vector{Int}
+function sieve(n::Int)
     """ primitive sieve of Eratosthenes; generates primes up to 10^8 in ~2 seconds """
     πₙ = Int(ceil(1.25506 * n / log(n)))
         # a guaranteed, close upper-bound on the number of primes <= bound
@@ -101,67 +101,3 @@ function insertNextPrime(primes::Vector{Int})
 end
 
 end
-
-module primesExtra
-"""non-optimal / non-practical prime-generating functions that
-(in theory) have better time complexity """
-
-function delete!(l::MutableLinkedList{Int}, r::StepRange{Int})
-    """delete! function overloaded for sieveLinkedList"""
-    cVal = first(r)
-    node = l.node.next
-
-    while cVal ≤ last(r)
-        # finding next node ≥ cVal
-        while node.data < cVal
-            node = node.next
-        end
-        # matching node found -> removing node
-        if node.data == cVal
-            prev = node.prev
-            next = node.next
-            prev.next = next
-            next.prev = prev
-            l.len -= 1
-        end
-        cVal += step(r)
-    end
-
-    return l
-
-end
-
-function sieveLinkedList(n::Int)::Vector{Int}
-    """ primitive sieve of eratosthenes; this version uses a linked list
-    and has better time complexity, but much larger constants; the other algorithm
-    therefore works better
-    """
-
-    πₙ = Int(ceil(1.25506 * n / log(n)))
-        # a guaranteed, close upper-bound on the number of primes <= bound
-
-    # initialising primes vector
-    primes::Vector{Int} = []
-    sizehint!(primes, πₙ)
-
-    numbers = MutableLinkedList{Int}()
-    for k in n:-1:2
-        pushfirst!(numbers, k)
-    end
-
-    while !isempty(numbers)
-        p = popfirst!(numbers)
-        push!(primes, p)
-        delete!(numbers, 2*p:p:n)
-    end
-
-    return primes
-end
-
-end
-
-function main()
-    @time sieve(10^8)
-end
-
-main()

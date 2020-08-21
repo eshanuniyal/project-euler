@@ -74,4 +74,39 @@ function findMinimalPellSolution(D::Integer)
 	return Aₖ
 end
 
+function insertProperDivisors(n::Integer, divisors::Vector{Set{Int}}, primes::Vector{Int})
+    
+    # argument checks
+    n < 1 && throw(ArgumentError("Input $n is not positive."))
+    length(divisors) ≠ n - 1 && throw(ArgumentError("Factors for numbers up to $n have not been computed."))
+    
+    # base case: 1 has no proper divisors
+    if n == 1
+        push!(divisors, Set([]))
+        return
+    end
+
+    nDivisors = Set{Int}()  # set to store proper divisors of n
+    nRoot = isqrt(n)  # root(n)
+    
+    # iterating over primes
+    for p in primes
+        # breaking condition: no prime divisor exists if p > nRoot
+        p > nRoot && break
+        # checking if p divides n
+        if n % p == 0
+            k = n ÷ p  # largest proper divisor of n
+            nDivisors = ∪(divisors[k], p.*divisors[k], Set([k]))
+                # proper divisors of n = proper divisors of k ∪ p * proper divisors of k ∪ k
+            break
+        end
+    end
+
+    # if nDivisors is empty, no factor was found; 1 is the only proper divisor
+    isempty(nDivisors) && push!(nDivisors, 1)
+
+    # updating divisors
+    push!(divisors, nDivisors)
+end
+
 end  # module
