@@ -41,4 +41,37 @@ function findContinuedFraction(num::Integer)
     return fractionConstants
 end
 
+"""
+    findMinimalPellSolution(D)
+
+Return minimal `x` such that `x` solves Pell's equation `x² - Dy² = 1` for some `y` given integer `D`
+"""
+function findMinimalPellSolution(D::Integer) 
+    
+	continuedFraction::Vector{Int} = findContinuedFraction(D)
+        # constants in continued fraction of root D (assumed D is not a square)
+    period = length(continuedFraction)
+
+	# initialising constants (all BigInts)
+    Aₖ₋₁, Bₖ₋₁ = one(BigInt), zero(BigInt)
+	Aₖ, Bₖ = BigInt(isqrt(D)), one(BigInt)
+	k = 0
+	
+	# while we don't have a solution to the Diophantine equation
+	while Aₖ^2 - D * Bₖ^2 ≠ 1
+		
+		# generating next convergent Aₖ₊₁/Bₖ₊₁
+		# formula for next convergent verified from https://mathworld.wolfram.com/Convergent.html
+		Aₖ₊₁ = continuedFraction[k % period + 1] * Aₖ + Aₖ₋₁  # +1 since indexing is 1-based
+        Bₖ₊₁ = continuedFraction[k % period + 1] * Bₖ + Bₖ₋₁
+
+		# updating variables
+		Aₖ₋₁, Bₖ₋₁ = Aₖ, Bₖ
+		Aₖ, Bₖ = Aₖ₊₁, Bₖ₊₁
+		k += 1
+    end
+
+	return Aₖ
+end
+
 end  # module
