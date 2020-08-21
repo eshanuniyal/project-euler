@@ -1,5 +1,5 @@
 # Julia Solution to Project Euler Problem 94
-# 12 August 2020
+# 21 August 2020
 # Runtime: ~10⁻³ seconds
 
 import AuxFunctions: findMinimalPellSolution
