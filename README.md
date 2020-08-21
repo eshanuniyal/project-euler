@@ -5,4 +5,4 @@ My solutions to some Project Euler problems.
 
 **C++**: Problems 64, 66, 81, 82, 83
 
-**Julia**: Problems 1, 2, 61, 81, 82, 83
+**Julia**: Problems 1, 2, 61, 64 66, 81, 82, 83, 94
