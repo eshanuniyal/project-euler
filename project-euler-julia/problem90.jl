@@ -4,10 +4,16 @@
 
 using Combinatorics  # combinations
 
-function cubeDigitPairsFast()
+"""
+    cubeDigitPairs()
+
+Returns the number of distinct arrangements of two cubes with one digit on each face such that 
+each square between 1 and 100 can be represented.
+"""
+function cubeDigitPairs()
 
     # generating tuples of digits of squares
-    squares = [(sq ÷ 10, sq % 10) for sq in [x^2 for x in 1:9]]
+    squares = [(x^2 ÷ 10, x^2 % 10) for x in 1:9]
 
     # generating all possible unique dices
     dices = collect(combinations(0:9, 6))
@@ -39,4 +45,4 @@ function cubeDigitPairsFast()
 end
 
 # function call and benchmarking
-@btime cubeDigitPairsFast()
+@btime cubeDigitPairs()
