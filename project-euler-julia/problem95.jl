@@ -1,4 +1,4 @@
-# Julia Solution to Project Euler Problem 94
+# Julia Solution to Project Euler Problem 95
 # 21 August 2020
 # Runtime: ~4 seconds
 
