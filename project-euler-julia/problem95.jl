@@ -89,5 +89,5 @@ function longestAmicableChain(bound::Integer)
     return minElement
 end
 
-# function call
+# function call and benchmarking
 @btime longestAmicableChain(10^6)
