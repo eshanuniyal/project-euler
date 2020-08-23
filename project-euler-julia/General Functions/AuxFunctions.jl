@@ -1,4 +1,5 @@
 module AuxFunctions
+import PrimeFunctions: insertNextPrime
 export findContinuedFraction
 
 """
@@ -74,20 +75,30 @@ function findMinimalPellSolution(D::Integer)
 	return Aₖ
 end
 
-function insertProperDivisors(n::Integer, divisors::Vector{Set{Int}}, primes::Vector{Int})
-    
-    # argument checks
-    n < 1 && throw(ArgumentError("Input $n is not positive."))
-    length(divisors) ≠ n - 1 && throw(ArgumentError("Factors for numbers up to $n have not been computed."))
-    
+"""
+    insertNextProperDivisors(divisors, primes)
+
+Given `divisors`, a Vector{Set{Int}} of length `n - 1` such that `divisors[k]` is a 
+set of all proper divisors of `k`, and `primes`, an ordered vector of prime numbers, 
+inserts set of proper divisors of `n` at index `n`.
+"""
+function insertNextProperDivisors(divisors::Vector{Set{Int}}, primes::Vector{Int})
+
+    n = length(divisors) + 1
+
     # base case: 1 has no proper divisors
     if n == 1
         push!(divisors, Set([]))
         return
     end
 
-    nDivisors = Set{Int}()  # set to store proper divisors of n
+    # ensuring sufficient primes (assuming ordered) have been generated
+    while nRoot > (isempty(primes) ? 0 : last(primes))
+        insertNextPrime(primes)
+    end
+
     nRoot = isqrt(n)  # root(n)
+    nDivisors = Set{Int}()  # set to store proper divisors of n
     
     # iterating over primes
     for p in primes
@@ -108,5 +119,61 @@ function insertProperDivisors(n::Integer, divisors::Vector{Set{Int}}, primes::Ve
     # updating divisors
     push!(divisors, nDivisors)
 end
+
+"""
+    insertNextFactorisations(divisors, primes)
+
+Given `factorisations`, a Vector{Set{Vector{Int}}} of length `n - 1` such that 
+`factorisations[k]` is a set of all (ordered) factorisations of `k`, and `primes`, 
+an ordered vector of prime numbers, inserts set of ordered factorisations of `n` at index `n`.
+"""
+function insertNextFactorisations(factorisations::Vector{Set{Vector{Int}}}, primes::Vector{Int})
+
+    # finding n (number for which factorisations have to be generated)
+    n = length(factorisations) + 1 
+    
+    # base case: 1 has no "proper" factorisations
+    if n == 1
+        push!(factorisations, Set{Vector{Int}}())
+        return
+    end
+
+    nRoot = isqrt(n)  # root(n)
+
+    # ensuring sufficient primes (assuming ordered) have been generated
+    while nRoot > (isempty(primes) ? 0 : last(primes))
+        insertNextPrime(primes)
+    end
+
+    nFactorisations = Set{Vector{Int}}()  # set to store ordered factorisations of n
+
+    # iterating over primes
+    for p in primes
+        # breaking condition: no prime divisor exists if p > nRoot
+        p > nRoot && break
+        # checking if p divides n
+        if n % p == 0
+            # iterating over factorisations of largest factor of n
+            for fs in factorisations[n ÷ p]
+                # appending p gives a factorisation of n
+                push!(nFactorisations, sort(vcat(fs, p)))
+                # multiplying exactly one of the factors in a factorisation gives another
+                    # factorisation for each such number
+                for k in 1:length(fs)
+                    fs[k] *= p
+                    push!(nFactorisations, sort(fs))  # sorting and pushing to nFactorisations
+                    fs[k] ÷= p  # fs should remain unmodified
+                end
+            end
+        end
+    end
+
+    # no proper divisor exists -> n is a prime
+    isempty(nFactorisations) && push!(nFactorisations, [n])
+
+    # updating factorisations
+    push!(factorisations, nFactorisations)
+end
+
 
 end  # module

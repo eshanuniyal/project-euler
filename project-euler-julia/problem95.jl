@@ -3,7 +3,7 @@
 # Runtime: ~4 seconds
 
 import PrimeFunctions: sieve
-import AuxFunctions: insertProperDivisors
+import AuxFunctions: insertNextProperDivisors
 
 """
     generateDivisorSums(bound)
@@ -21,7 +21,7 @@ function generateDivisorSums(bound::Integer)
 
     # generating proper divisors and proper divisor sums
     for n in 1:bound
-        insertProperDivisors(n, properDivisors, primes)
+        insertNextProperDivisors(properDivisors, primes)
         push!(divisorSums, sum(properDivisors[n]))
     end
 
