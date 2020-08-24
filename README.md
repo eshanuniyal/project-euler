@@ -72,7 +72,7 @@ My solutions to some Project Euler problems.
 | 61 | Cyclical Figurate Numbers | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem61.jl)
 | 62 | Cubic Permutations | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_62.py) |
 | 63 | Powerful digit counts | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_63.py) |
-| 64 | Odd period square roots | [C++](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-c%2B%2B/problem64.cpp), [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem1.jl) |
+| 64 | Odd period square roots | [C++](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-c%2B%2B/problem64.cpp), [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem64.jl) |
 | 65 | Convergents of e | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_65.py) |
 | 66 | Diophantine equation | [C++](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-c%2B%2B/problem66.cpp) |
 | 67 | Maximum path sum II | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_67.py) |
