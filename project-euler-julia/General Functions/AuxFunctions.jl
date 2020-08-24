@@ -1,6 +1,7 @@
 module AuxFunctions
+
 import PrimeFunctions: insertNextPrime
-export findContinuedFraction
+using SymEngine  # symbolic mathematics
 
 """
     findContinuedFraction(num)
@@ -92,12 +93,13 @@ function insertNextProperDivisors(divisors::Vector{Set{Int}}, primes::Vector{Int
         return
     end
 
+    nRoot = isqrt(n)  # root(n)
+
     # ensuring sufficient primes (assuming ordered) have been generated
     while nRoot > (isempty(primes) ? 0 : last(primes))
         insertNextPrime(primes)
     end
 
-    nRoot = isqrt(n)  # root(n)
     nDivisors = Set{Int}()  # set to store proper divisors of n
     
     # iterating over primes
@@ -173,6 +175,32 @@ function insertNextFactorisations(factorisations::Vector{Set{Vector{Int}}}, prim
 
     # updating factorisations
     push!(factorisations, nFactorisations)
+end
+
+"""
+    interpolatingPolynomial(points)
+
+Returns the interpolating polynomial of some unknown function `f` given vector of tuples 
+    `points` defined such that `points[k] = (xₖ, f(xₖ))`.
+"""
+function interpolatingPolynomial(points)
+    
+    n = length(points) - 1  # degree of interpolating polynomial
+    xᵥ = [first(point) for point in points]  # x-coordinates
+    fᵥ = [last(point) for point in points]  # y-coordinates
+
+    # computing Vandermonde matrix
+    V = [Rational(xᵥ[r + 1]^p) for r in 0:n, p in 0:n]  # (note: we add 1 ∵ 1-based indexing)
+    aᵥ = V \ fᵥ  # coefficients of interpolating polynomial
+    # (from Newton form of interpolating polynomial, we know V × aᵥ = fᵥ ⟹ aᵥ = V⁻¹ × fᵥ)
+
+    # creating symbol x
+    x = symbols(:x)
+    # generating interpolating polynomial: p(x) = Σaₖxᵏ for k in [0, n]
+    pₓ = sum([aᵥ[k + 1]*x^k for k in 0:n])  # (note: we add 1 ∵ 1-based indexing)
+
+    # return symbolic parameter and interpolating polynomial
+    return x, pₓ
 end
 
 
