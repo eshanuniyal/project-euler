@@ -1,6 +1,6 @@
 # Julia Solution to Project Euler Problem 203
 # 25 August 2020
-# Runtime: 10⁻³ seconds
+# Runtime: ~1 second
 
 import PrimeFunctions: sieve
 
@@ -44,4 +44,4 @@ function squareFreeBinomialCoefficients(nRows)
 end
 
 # function call and benchmarking
-@time squareFreeBinomialCoefficients(51)
+@btime squareFreeBinomialCoefficients(51)
