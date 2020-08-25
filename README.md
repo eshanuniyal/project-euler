@@ -6,10 +6,11 @@ My solutions to some Project Euler problems.
 
 **C++**: Problems 64, 66, 81, 82, 83
 
-**Julia**: Problems 1, 2, 61, 64, 66, 81, 82, 83, 88, 90, 93, 94, 95, 96, 101, 104, 107
+**Julia**: Problems 1, 2, 61, 64, 66, 81, 82, 83, 88, 90, 93, 94, 95, 96, 101, 104, 107, 357
 ## Last 10 Problems
 | # | Name | Solution | Date |
 | :---: | :--- | :--- | :--- |
+| 357 | Prime generating integer | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem357.jl) | 25 August, 2020 |
 | 107 | Minimal network | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem107.jl) | 24 August, 2020 |
 | 104 | Pandigital Fibonacci ends | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem104.jl) | 24 August, 2020 |
 | 101 | Optimum polynomial | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem101.jl) | 24 August, 2020 |
@@ -19,7 +20,6 @@ My solutions to some Project Euler problems.
 | 90 | Cube digit pairs | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem90.jl) | 22 August, 2020 |
 | 95 | Amicable chains | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem95.jl) | 21 August, 2020 |
 | 94 | Almost equilateral triangles | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem94.jl) | 21 August, 2020 |
-| 61 | Cyclical Figurate Numbers | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem61.jl) | 6 August, 2020 |
 
 ## All Problems
 | # | Name | Solutions |
