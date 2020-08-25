@@ -1,4 +1,4 @@
-# Julia Solution to Project Euler Problem 20
+# Julia Solution to Project Euler Problem 205
 # 25 August 2020
 # Runtime: 10⁻⁴ seconds
 
