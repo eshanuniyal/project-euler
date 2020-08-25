@@ -140,4 +140,4 @@ My solutions to some Project Euler problems.
 | 206 | Concealed square | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_206.py) |
 | 345 | Matrix sum | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem345.jl) |
 | 347 | Largest integer divisible by two primes | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_347.py) |
-| 357 | Prime generating integer | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem357.jl) |
+| 357 | Prime generating integers | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem357.jl) |
