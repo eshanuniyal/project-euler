@@ -1,5 +1,5 @@
 # Julia Solution to Project Euler Problem 88
-# 7 August 2020
+# 23 August 2020
 # Runtime: ~2 seconds
 
 import AuxFunctions: insertNextFactorisations
