@@ -10,6 +10,7 @@ My solutions to some Project Euler problems.
 ## Last 10 Problems
 | # | Name | Solution | Date |
 | :---: | :--- | :--- | :--- |
+| 345 | Matrix sum | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem345.jl) | 25 August, 2020 |
 | 357 | Prime generating integer | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem357.jl) | 25 August, 2020 |
 | 107 | Minimal network | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem107.jl) | 24 August, 2020 |
 | 104 | Pandigital Fibonacci ends | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem104.jl) | 24 August, 2020 |
@@ -19,7 +20,6 @@ My solutions to some Project Euler problems.
 | 93 | Arithmetic expressions | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem93.jl) | 23 August, 2020 |
 | 90 | Cube digit pairs | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem90.jl) | 22 August, 2020 |
 | 95 | Amicable chains | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem95.jl) | 21 August, 2020 |
-| 94 | Almost equilateral triangles | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem94.jl) | 21 August, 2020 |
 
 ## All Problems
 | # | Name | Solutions |
@@ -136,5 +136,6 @@ My solutions to some Project Euler problems.
 | 145 | Reversible numbers | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_145.py) |
 | 149 | Maximum-sum subsequence | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_149.py) |
 | 206 | Concealed square | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_206.py) |
+| 345 | Matrix sum | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem345.jl) |
 | 347 | Largest integer divisible by two primes | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_347.py) |
 | 357 | Prime generating integer | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem357.jl) |
