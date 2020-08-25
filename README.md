@@ -1,12 +1,27 @@
 # project-euler
 My solutions to some Project Euler problems.
 
+## Problems Solved by Programming Language
 **Python**: Problems 1-60, 62, 63, 65, 67-81, 84-87, 89, 91, 92, 97-100, 102, 112, 119, 120, 123, 124, 145, 149, 206, 347
 
 **C++**: Problems 64, 66, 81, 82, 83
 
-**Julia**: Problems 1, 2, 61, 64, 66, 81, 82, 83, 88, 90, 93, 94, 95, 96, 101, 104
+**Julia**: Problems 1, 2, 61, 64, 66, 81, 82, 83, 88, 90, 93, 94, 95, 96, 101, 104, 107
+## Last 10 Problems
+| # | Name | Solution | Date |
+| :---: | :--- | :--- | :--- |
+| 107 | Minimal network | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem107.jl) | 24 August, 2020 |
+| 104 | Pandigital Fibonacci ends | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem104.jl) | 24 August, 2020 |
+| 101 | Optimum polynomial | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem101.jl) | 24 August, 2020 |
+| 88 | Product-sum numbers | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem88.jl) | 23 August, 2020 |
+| 96 | Su Doku | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem96.jl) | 23 August, 2020 |
+| 93 | Arithmetic expressions | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem93.jl) | 23 August, 2020 |
+| 90 | Cube digit pairs | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem90.jl) | 22 August, 2020 |
+| 95 | Amicable chains | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem95.jl) | 21 August, 2020 |
+| 94 | Almost equilateral triangles | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem94.jl) | 21 August, 2020 |
+| 61 | Cyclical Figurate Numbers | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem61.jl) | 6 August, 2020 |
 
+## All Problems
 | # | Name | Solutions |
 | :---: | :--- | :--- |
 | 1 | Multiples of 3 and 5 | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_1.py), [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem1.jl) | 
@@ -69,7 +84,7 @@ My solutions to some Project Euler problems.
 | 58 | Spiral primes | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_58.py) |
 | 59 | XOR decryption | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_59.py) |
 | 60 | Prime Pair Sets | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_60.py) |
-| 61 | Cyclical Figurate Numbers | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem61.jl)
+| 61 | Cyclical Figurate Numbers | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem61.jl) |
 | 62 | Cubic Permutations | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_62.py) |
 | 63 | Powerful digit counts | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_63.py) |
 | 64 | Odd period square roots | [C++](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-c%2B%2B/problem64.cpp), [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem64.jl) |
@@ -96,9 +111,9 @@ My solutions to some Project Euler problems.
 | 85 | Counting rectangles | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_85.py) |
 | 86 | Cuboid route | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_86.py) |
 | 87 | Prime power triples | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_87.py) |
-| 88 | Product-sum numbers | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem88.jl)
+| 88 | Product-sum numbers | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem88.jl) |
 | 89 | Roman numerals | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_89.py) |
-| 90 | Cube digit pairs | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem90.jl)
+| 90 | Cube digit pairs | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem90.jl) |
 | 91 | Right triangles with integer coordinates | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_91.py) |
 | 92 | Square digit chains | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_92.py) |
 | 93 | Arithmetic expressions | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem93.jl) |
@@ -111,7 +126,8 @@ My solutions to some Project Euler problems.
 | 100 | Arranged probability | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_100.py) |
 | 101 | Optimum polynomial | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem101.jl) |
 | 102 | Triangle containment | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_102.py) |
-| 104 | Pandigital Fibonacci ends | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem104.jl)
+| 104 | Pandigital Fibonacci ends | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem104.jl) |
+| 107 | Minimal network | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem107.jl) |
 | 112 | Bouncy numbers | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_112.py) |
 | 119 | Digit power sum | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_119.py) |
 | 120 | Square remainders | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_120.py) |
