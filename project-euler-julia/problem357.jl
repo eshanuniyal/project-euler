@@ -1,6 +1,6 @@
 # Julia Solution to Project Euler Problem 357
 # 25 August 2020
-# Runtime: ~8 seconds
+# Runtime: ~4 seconds
 
 import PrimeFunctions: sieve
 
@@ -17,30 +17,13 @@ function checkNumber(n, primes, primesSet)
     n == 1 && return true
 
     """
-    Optimisation 1: we must have n = 2k for some odd k, otherwise
+    Optimisation: we must have n = 2k for some odd k, otherwise
         Case 1: n = 4k' = 2 × 2k', and 2 + 2k' = 2(1 + k') ∉ primes,
         Case 2: n = 2k' + 1 = 1 × (2k' + 1), and  1 + 2k' + 1 = 2(1 + k') ∉ primes  
     """
     # return false if n ≠ 2k for any odd k
     n % 4 == 2 || return false
-
-    """
-    Optimisation 2: n must not have a factor that is a perfect square of a prime, otherwise
-        n = c × p² = cp × p, and cp + p = c(p + 1) ∉ primes
-    """
-    nₜ = n  # temporary n variable (for finding prime factors)
-    # iterating over primes
-    for p in primes
-        # return false if nₜ is divisible by some prime square
-        nₜ % p^2 == 0 && return false
-        # reduce nₜ if nₜ is divisible by prime p
-        if nₜ % p == 0
-            nₜ ÷= p
-            # in either case n == 1 or nₜ ∈ primeSet, nₜ cannot be divisible by a prime-square
-            (nₜ == 1 || nₜ ∈ primesSet) && break
-        end
-    end
-
+    
     """ Checking if n is a prime generating integer """
     # iterating over factor pairs of number
     for k in 1:isqrt(n)
