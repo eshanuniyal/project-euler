@@ -6,10 +6,12 @@ My solutions to some Project Euler problems.
 
 **C++**: Problems 64, 66, 81, 82, 83
 
-**Julia**: Problems 1, 2, 61, 64, 66, 81, 82, 83, 88, 90, 93, 94, 95, 96, 101, 104, 107, 203, 205, 345, 357
+**Julia**: Problems 1, 2, 61, 64, 66, 81, 82, 83, 88, 90, 93, 94, 95, 96, 101, 104, 107, 179, 187, 203, 205, 345, 357
 ## Last 10 Problems
 | # | Name | Solution | Date |
 | :---: | :--- | :--- | :--- |
+| 179 | Consecutive proper divisors | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem179.jl) | 26 August, 2020 |
+| 187 | Semiprimes | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem187.jl) | 26 August, 2020 |
 | 203 | Squarefree binomial coefficients | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem203.jl) | 25 August, 2020 |
 | 205 | Dice game | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem205.jl) | 25 August, 2020 |
 | 345 | Matrix sum | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem345.jl) | 25 August, 2020 |
@@ -18,8 +20,6 @@ My solutions to some Project Euler problems.
 | 104 | Pandigital Fibonacci ends | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem104.jl) | 24 August, 2020 |
 | 101 | Optimum polynomial | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem101.jl) | 24 August, 2020 |
 | 88 | Product-sum numbers | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem88.jl) | 23 August, 2020 |
-| 96 | Su Doku | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem96.jl) | 23 August, 2020 |
-| 93 | Arithmetic expressions | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem93.jl) | 23 August, 2020 |
 
 ## All Problems
 | # | Name | Solutions |
@@ -135,6 +135,8 @@ My solutions to some Project Euler problems.
 | 124 | Ordered radicals | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_124.py) |
 | 145 | Reversible numbers | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_145.py) |
 | 149 | Maximum-sum subsequence | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_149.py) |
+| 179 | Consecutive proper divisors | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem179.jl) |
+| 187 | Semiprimes | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem187.jl) |
 | 203 | Squarefree binomial coefficients | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem203.jl) |
 | 205 | Dice game | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem205.jl) |
 | 206 | Concealed square | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_206.py) |
