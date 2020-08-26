@@ -3,7 +3,7 @@
 # Runtime: ~4 seconds
 
 import PrimeFunctions: generatePrimes
-import AuxFunctions: insertNextProperDivisors
+import AuxFunctions: nextProperDivisors
 
 """
     generateDivisorSums(bound)
@@ -17,13 +17,8 @@ function generateDivisorSums(bound::Integer)
 
     # creating relevant vectors
     properDivisors = Vector{Set{Int}}()  # properDivisors[k] = vector of proper divisors of k
-    divisorSums = Vector{Int}()  # divisorSums[k] = sum(properDivisors[k])
-
-    # generating proper divisors and proper divisor sums
-    for n in 1:bound
-        insertNextProperDivisors(properDivisors, primes)
-        push!(divisorSums, sum(properDivisors[n]))
-    end
+    divisorSums = [nextProperDivisors(properDivisors, primes) |> sum for n in 1:bound]  
+        # divisorSums[k] = sum(properDivisors[k])
 
     return divisorSums
 end

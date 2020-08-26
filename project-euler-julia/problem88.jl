@@ -1,8 +1,9 @@
 # Julia Solution to Project Euler Problem 88
 # 23 August 2020
-# Runtime: ~2 seconds
+# Runtime: ~1 second
 
-import AuxFunctions: insertNextFactorisations
+import PrimeFunctions: generatePrimes
+import AuxFunctions: nextFactorisations
 
 """
     checkProductSumNumber(n, k, fs)
@@ -21,7 +22,7 @@ for sets of size `2 ≤ k ≤ bound`.
 function findMinProductSumNumbersSum(bound)
 
     factorisations = Vector{Set{Vector{Int}}}()  # vector of sets of factorisations of each number
-    primes = Vector{Int}()  # vector of prime numbers
+    primes = generatePrimes(bound)  # vector of prime numbers
 
     minProdSumNumbers = Set{Int}()  # set of known minimum product sum numbers
     
@@ -32,7 +33,7 @@ function findMinProductSumNumbersSum(bound)
         while true
             # updating factorisations as necessary
             while n > length(factorisations)
-                insertNextFactorisations(factorisations, primes)
+                nextFactorisations(factorisations, primes)
             end
             # checking if n is a product sum number for a set of size k
             if checkProductSumNumber(n, k, factorisations)
@@ -48,5 +49,5 @@ function findMinProductSumNumbersSum(bound)
 end
 
 # function call and benchmarking
-@btime findMinimalProductSumNumbersSum(12000)
+@btime findMinProductSumNumbersSum(12000)
 
