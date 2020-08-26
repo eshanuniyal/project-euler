@@ -15,7 +15,7 @@ end
 
 function sieve(bound::Integer)
     """ primitive sieve of Eratosthenes; generates primes up to 10^8 in ~1 second"""
-    πₙ = Int(ceil(1.25506 * bound / log(bound)))
+    πₙ = ceil(Int, 1.25506 * bound / log(bound))
         # a guaranteed, close upper-bound on the number of primes <= bound
 
     # initialising primes vector
@@ -52,7 +52,7 @@ end
 function segmentedSieve(bound::Integer)
 
     # a guaranteed, close upper-bound on the number of primes <= bound
-    πₙ = Int(ceil(1.25506 * bound / log(bound)))
+    πₙ = ceil(Int, 1.25506 * bound / log(bound))
     Δ = isqrt(bound)  # segment size
 
     # finding primes in first segment
@@ -60,7 +60,7 @@ function segmentedSieve(bound::Integer)
     sizehint!(primes, πₙ)
 
     # iterating over remaining segments
-    for s in 2 : Int(ceil(bound / Δ))
+    for s in 2 : ceil(Int, bound / Δ)
         sₗ, sₘ = (s - 1)Δ, min(s * Δ, bound)  # current segment has range (sₗ, sₘ]
         isPrimeArr = fill(true, sₘ - sₗ)
         sₘroot = √sₘ
