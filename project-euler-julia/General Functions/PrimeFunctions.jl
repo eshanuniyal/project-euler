@@ -1,42 +1,21 @@
 using DataStructures   # LinkedLists
 import Base.delete!
-# using TimerOutputs
-
-# to = TimerOutput()
 
 module PrimeFunctions
-export generatePrimes, sieve, insertNextPrime
+using TimerOutputs
 
-function generatePrimes(bound::Int)::Vector{Int}
-    """primitive, brute force algorithm"""
-    πₙ::Int = ceil(1.25506 * bound / log(bound))
-        # a guaranteed, close upper-bound on the number of primes <= bound
+function generatePrimes(bound::Integer)
 
-    # creating primes vector
-    primes::Vector{Int} = [2]
-    sizehint!(primes, πₙ)  # preallocating storage
-
-    # iterating over odd numbers
-    for num in 3:2:bound
-        # maximum prime factor num can have must be <= root(num)
-        maxPrimeFactor::Int = isqrt(num)
-        # iterating over primes
-        for prime in primes
-            # no prime factors ⇒ num is prime
-            if (prime > maxPrimeFactor)
-                push!(primes, num)
-                break
-            end
-            # prime factor found ⇒ break
-            num % prime == 0 && break
-        end
-    end
-    return primes
+    # sieve sufficiently fast for bound < 10⁷ 
+    bound < 10^7 && return sieve(bound)
+    # segmentedSieve generally faster for bound ≥ 10⁷
+    return segmentedSieve(bound)
 end
 
-function sieve(n::Int)
-    """ primitive sieve of Eratosthenes; generates primes up to 10^8 in ~2 seconds """
-    πₙ = Int(ceil(1.25506 * n / log(n)))
+
+function sieve(bound::Integer)
+    """ primitive sieve of Eratosthenes; generates primes up to 10^8 in ~1 second"""
+    πₙ = Int(ceil(1.25506 * bound / log(bound)))
         # a guaranteed, close upper-bound on the number of primes <= bound
 
     # initialising primes vector
@@ -44,32 +23,65 @@ function sieve(n::Int)
     sizehint!(primes, πₙ)
 
     # initialising numbers vector (sieve)
-    numbers::Vector{Bool} = fill(true,n)
+    numbers = fill(true, bound)
     numbers[1] = false
 
     # iterating over numbers to find primes
-    for i in 2:isqrt(n)
+    for i in 2:isqrt(bound)
         # numbers[i] == true -> i is a prime
         if numbers[i]
             # inserting in primes
             push!(primes, i)
             # sieving multiples
-            for j in 2*i:i:n
+            for j in i^2:i:bound
                 numbers[j] = false
             end
         end
     end
 
     # inserting all remaining primes
-    for k in isqrt(n) + 1 : n
-        if numbers[k]
-            push!(primes, k)
-        end
+    for k in isqrt(bound) + 1 : bound
+        numbers[k] && push!(primes, k)
     end
 
     # return primes vector
     return primes
 end
+
+
+function segmentedSieve(bound::Integer)
+
+    # a guaranteed, close upper-bound on the number of primes <= bound
+    πₙ = Int(ceil(1.25506 * bound / log(bound)))
+    Δ = isqrt(bound)  # segment size
+
+    # finding primes in first segment
+    primes = sieve(Δ)
+    sizehint!(primes, πₙ)
+
+    # iterating over remaining segments
+    for s in 2 : Int(ceil(bound / Δ))
+        sₗ, sₘ = (s - 1)Δ, min(s * Δ, bound)  # current segment has range (sₗ, sₘ]
+        isPrimeArr = fill(true, sₘ - sₗ)
+        sₘroot = √sₘ
+
+        for p in primes
+            p > sₘroot && break
+            minMultₚ = (sₗ ÷ p)p
+            minMultₚ ≤ sₗ && (minMultₚ += p)
+            for pMult in minMultₚ : p : sₘ
+                isPrimeArr[pMult - sₗ] = false
+            end
+        end
+
+        for k in 1 : sₘ - sₗ
+            isPrimeArr[k] && push!(primes, k + sₗ)
+        end
+    end
+
+    return primes
+end
+
 
 function insertNextPrime(primes::Vector{Int})
     """insert next prime"""
