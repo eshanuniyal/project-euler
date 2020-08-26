@@ -2,7 +2,7 @@
 # 25 August 2020
 # Runtime: ~1 second
 
-import PrimeFunctions: sieve
+import PrimeFunctions: generatePrimes
 
 """
     squareFree(n, primes, primesSet)
@@ -42,7 +42,7 @@ function squarefreeBinomialCoeffsSum(nRows)
     # generating all unique binomial coefficients for n < nRows
     coeffs = Set([bin(n, k) for n in 1:nRows-1 for k in 0:n÷2])
     # generating enough primes to check whether coefficients are square free
-    primes = Int(coeffs |> maximum |> isqrt) |> sieve
+    primes = Int(coeffs |> maximum |> isqrt) |> generatePrimes
         # if k is not square-free, it is divisible by p² for some prime p
     # creating set of primes (for fast checking of primality)
     primesSet = Set(primes)

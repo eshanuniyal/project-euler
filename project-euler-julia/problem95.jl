@@ -2,7 +2,7 @@
 # 21 August 2020
 # Runtime: ~4 seconds
 
-import PrimeFunctions: sieve
+import PrimeFunctions: generatePrimes
 import AuxFunctions: insertNextProperDivisors
 
 """
@@ -13,7 +13,7 @@ Returns a vector containing the sums of all proper divisors of `k` for `k ∈ 1:
 function generateDivisorSums(bound::Integer)
 
     # generating primes
-    primes = sieve(bound)
+    primes = generatePrimes(bound)
 
     # creating relevant vectors
     properDivisors = Vector{Set{Int}}()  # properDivisors[k] = vector of proper divisors of k

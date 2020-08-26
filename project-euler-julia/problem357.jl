@@ -2,8 +2,7 @@
 # 25 August 2020
 # Runtime: ~4 seconds
 
-import PrimeFunctions: sieve
-
+import PrimeFunctions: generatePrimes
 
 """
     checkNumber(n, primes, primesSet)
@@ -44,7 +43,7 @@ function primeGeneratingIntegersSum(bound)
 
     # generating prime numbers up to bound + 1 
         # (+1 since we also need to check if bound is a prime-generating integer)
-    primes = sieve(bound + 1)
+    primes = generatePrimes(bound + 1)
     # creating set of primes for easy checking of primality
     primesSet = Set(primes)
 
