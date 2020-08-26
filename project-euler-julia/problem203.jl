@@ -6,6 +6,9 @@ import PrimeFunctions: sieve
 
 """
     squareFree(n, primes, primesSet)
+
+Returns true if no square of a prime divides `n`, given `primes`, a vector of prime numbers,
+    and `primesSet`, a set of the same prime numbers.
 """
 function isSquareFree(n, primes, primesSet)
 
@@ -26,7 +29,12 @@ function isSquareFree(n, primes, primesSet)
     return true
 end
 
-function squareFreeBinomialCoefficients(nRows)
+"""
+    squarefreeBinomialCoeffsSum(nRows)
+
+Returns the sum of the distinct squarefree numbers in the first `nRows` rows of Pascal's triangle.
+"""
+function squarefreeBinomialCoeffsSum(nRows)
 
     # defining binomial function
     bin(n, k) = factorial(big(n)) ÷ (factorial(big(k)) * factorial(big(n - k)))
@@ -44,4 +52,4 @@ function squareFreeBinomialCoefficients(nRows)
 end
 
 # function call and benchmarking
-@btime squareFreeBinomialCoefficients(51)
+@btime squarefreeBinomialCoeffsSum(51)
