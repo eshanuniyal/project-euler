@@ -13,10 +13,9 @@ positive divisors.
 """
 function numConsecutiveProperDivisors(bound)
 
-    # generating prime numbers and creating set for fast primality check
+    # generating prime numbers (and set, for fast primality check)
     primes = generatePrimes(bound)
     primesSet = Set(primes)
-
     # vector of divisor counts 
     dCounts = Vector{Int}()  # dCounts[k] = number of positive divisors of k
 

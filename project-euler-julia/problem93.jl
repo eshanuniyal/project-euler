@@ -5,6 +5,33 @@
 using Combinatorics  # permutations, combinations
 
 """
+    findOptimalCombination(digits)
+
+Returns `"abcd"` for four digits `a < b < c < d` such that using each digit exactly once and making use
+of the four arithmetic operations (+, -, *, /) and brackets/parentheses, the longest set of consecutive
+positive integers `1` to `n` can be obtained.
+"""
+function findOptimalCombination()
+
+    # variables to keep track of largest limit found so far and associated combination
+    maxLimit, optimalComb = 0, Int[]
+
+    # iterating over all combinations of four digits
+    for comb in collect(combinations(1:9, 4))
+        combLimit = findOutputLimit(comb)  # 1 to combLimit can all be generated
+        # updating variables as necessary
+        if combLimit > maxLimit
+            maxLimit, optimalComb = combLimit, comb
+        end
+    end
+
+    # sorting optimalComb (digits should be in ascending order) and joining
+    return optimalComb |> sort! |> join
+
+end
+
+
+"""
     findOutputLimit(digits)
 
 Returns the largest `n` such that using each digit in `digits` exactly once and making use
@@ -34,32 +61,6 @@ function findOutputLimit(digits)
 
     # returning largest n such that positive integers 1 to n are all in allResults
     return findfirst(k -> k ∉ allResults, 1:9^4) - 1
-end
-
-"""
-    findOptimalCombination(digits)
-
-Returns `"abcd"` for four digits `a < b < c < d` such that using each digit exactly once and making use
-of the four arithmetic operations (+, -, *, /) and brackets/parentheses, the longest set of consecutive
-positive integers `1` to `n` can be obtained.
-"""
-function findOptimalCombination()
-
-    # variables to keep track of largest limit found so far and associated combination
-    maxLimit, optimalComb = 0, Int[]
-
-    # iterating over all combinations of four digits
-    for comb in collect(combinations(1:9, 4))
-        combLimit = findOutputLimit(comb)  # 1 to combLimit can all be generated
-        # updating variables as necessary
-        if combLimit > maxLimit
-            maxLimit, optimalComb = combLimit, comb
-        end
-    end
-
-    # sorting optimalComb (digits should be in ascending order) and joining
-    return optimalComb |> sort! |> join
-
 end
 
 # function call and benchmarking

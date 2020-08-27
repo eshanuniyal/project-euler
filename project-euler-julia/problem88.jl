@@ -6,14 +6,6 @@ import PrimeFunctions: generatePrimes
 import AuxFunctions: nextFactorisations
 
 """
-    checkProductSumNumber(n, k, fs)
-
-Returns whether any factorisation `f ∈ fs` of `n` can be used to create a product and sum of size
-`k` that equals `n`.
-"""
-checkProductSumNumber(n, k, fs) = any(f -> sum(f) + k - length(f) == n, fs[n])
-
-"""
     findMinProductSumNumbersSum(bound)
 
 Returns the sum of all minimum product-sum numbers (as defined in Project Euler Problem 88)
@@ -47,6 +39,15 @@ function findMinProductSumNumbersSum(bound)
     # return sum of all minimum product-sum numbers
     return sum(minProdSumNumbers)
 end
+
+
+"""
+    checkProductSumNumber(n, k, fs)
+
+Returns whether any factorisation `f ∈ fs` of `n` can be used to create a product and sum of size
+`k` that equals `n`.
+"""
+checkProductSumNumber(n, k, fs) = any(f -> sum(f) + k - length(f) == n, fs[n])
 
 # function call and benchmarking
 @btime findMinProductSumNumbersSum(12000)

@@ -5,6 +5,28 @@
 import PrimeFunctions: generatePrimes
 
 """
+    squarefreeBinomialCoeffsSum(nRows)
+
+Returns the sum of the distinct squarefree numbers in the first `nRows` rows of Pascal's triangle.
+"""
+function squarefreeBinomialCoeffsSum(nRows)
+
+    # defining binomial function
+    bin(n, k) = factorial(big(n)) ÷ (factorial(big(k)) * factorial(big(n - k)))
+
+    # generating all unique binomial coefficients for n < nRows
+    coeffs = Set([bin(n, k) for n in 1:nRows-1 for k in 0:n÷2])
+    # generating enough primes to check whether coefficients are square free
+    primes, primesSet = Int(coeffs |> maximum |> isqrt) |> generatePrimes
+    primesSet = Set(primes)
+
+    # if k is not square-free, it is divisible by p² for some prime p
+    # returning sum of binomial coefficients that are squarefree
+    return filter(c -> isSquareFree(c, primes, primesSet), coeffs) |> sum
+end
+
+
+"""
     squareFree(n, primes, primesSet)
 
 Returns true if no square of a prime divides `n`, given `primes`, a vector of prime numbers,
@@ -27,28 +49,6 @@ function isSquareFree(n, primes, primesSet)
 
     # n passed square-free test ⟹ return true
     return true
-end
-
-"""
-    squarefreeBinomialCoeffsSum(nRows)
-
-Returns the sum of the distinct squarefree numbers in the first `nRows` rows of Pascal's triangle.
-"""
-function squarefreeBinomialCoeffsSum(nRows)
-
-    # defining binomial function
-    bin(n, k) = factorial(big(n)) ÷ (factorial(big(k)) * factorial(big(n - k)))
-
-    # generating all unique binomial coefficients for n < nRows
-    coeffs = Set([bin(n, k) for n in 1:nRows-1 for k in 0:n÷2])
-    # generating enough primes to check whether coefficients are square free
-    primes = Int(coeffs |> maximum |> isqrt) |> generatePrimes
-        # if k is not square-free, it is divisible by p² for some prime p
-    # creating set of primes (for fast checking of primality)
-    primesSet = Set(primes)
-
-    # returning sum of binomial coefficients that are squarefree
-    return filter(c -> isSquareFree(c, primes, primesSet), coeffs) |> sum
 end
 
 # function call and benchmarking

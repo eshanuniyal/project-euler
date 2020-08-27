@@ -5,6 +5,29 @@
 using DelimitedFiles # readdlm
 
 """
+	minPathSumTwoWays(fileName)
+
+Returns sum of the minimum path from the top-left element of a grid defined in `fileName` 
+to the bottom-right element moving only down and right.
+"""
+function minPathSumTwoWays(fileName::String)::Int
+    # return minimum path sum across matrix defined in fileName moving only down and right
+
+    # extracting matrix
+    matrix::Matrix{Int} = readdlm(fileName, ',', Int, '\n')
+    # defining minPathSums matrix
+    minPathSums = Matrix{Union{Int, Nothing}}(nothing, size(matrix))
+		# -nothingby default; if minPathSums[i, j] == nothing, 
+		# the minimal path from (1, 1) to (i, j) has not been found
+
+	# setting base case: minimum path from last element to last element is the element itself
+	minPathSums[end, end] = matrix[end, end]
+
+	return minPathSum(1, 1, matrix, minPathSums)
+end
+
+
+"""
 	minPathSum(sr, sc, matrix, minPathSums)
 
 Recursive function which returns the sum of the minimal path from `matrix[sr, sc]` to `matrix[end, end]`
@@ -38,26 +61,5 @@ function minPathSum(sr::Int, sc::Int, matrix::Matrix{Int},  minPathSums::Matrix{
 
 end
 
-"""
-	minPathSumTwoWays(fileName)
-
-Returns sum of the minimum path from the top-left element of a grid defined in `fileName` 
-to the bottom-right element moving only down and right.
-"""
-function minPathSumTwoWays(fileName::String)::Int
-    # return minimum path sum across matrix defined in fileName moving only down and right
-
-    # extracting matrix
-    matrix::Matrix{Int} = readdlm(fileName, ',', Int, '\n')
-    # defining minPathSums matrix
-    minPathSums = Matrix{Union{Int, Nothing}}(nothing, size(matrix))
-		# -1 by default; if minPathSums[i, j] == -1, the minimal path from (1, 1) to (i, j) has not been found
-
-	# setting base case: minimum path from last element to last element is the element itself
-	minPathSums[end, end] = matrix[end, end]
-
-	return minPathSum(1, 1, matrix, minPathSums)
-end
-
-# function call
+# function call and benchmarking
 @btime minPathSumTwoWays("Problem Resources\\problems81,82,83.txt")

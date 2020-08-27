@@ -19,7 +19,7 @@ function sieve(bound::Integer)
         # a guaranteed, close upper-bound on the number of primes <= bound
 
     # initialising primes vector
-    primes::Vector{Int} = []
+    primes = Vector{Int}()
     sizehint!(primes, πₙ)
 
     # initialising numbers vector (sieve)
@@ -50,7 +50,7 @@ end
 
 
 function segmentedSieve(bound::Integer)
-
+    """segmented sieve of Eratosthenes; same time complexity as primitive sieve, better space complexity"""
     # a guaranteed, close upper-bound on the number of primes <= bound
     πₙ = ceil(Int, 1.25506 * bound / log(bound))
     Δ = isqrt(bound)  # segment size

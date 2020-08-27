@@ -6,24 +6,6 @@ import PrimeFunctions: generatePrimes
 import AuxFunctions: nextProperDivisors
 
 """
-    generateDivisorSums(bound)
-
-Returns a vector containing the sums of all proper divisors of `k` for `k ∈ 1:bound`.
-"""
-function generateDivisorSums(bound::Integer)
-
-    # generating primes
-    primes = generatePrimes(bound)
-
-    # creating relevant vectors
-    properDivisors = Vector{Set{Int}}()  # properDivisors[k] = vector of proper divisors of k
-    divisorSums = [nextProperDivisors(properDivisors, primes) |> sum for n in 1:bound]  
-        # divisorSums[k] = sum(properDivisors[k])
-
-    return divisorSums
-end
-
-"""
     longestAmicableChain(bound)
 
 Returns the smallest element in the longest amicable chain 
@@ -82,6 +64,25 @@ function longestAmicableChain(bound::Integer)
     end
 
     return minElement
+end
+
+
+"""
+    generateDivisorSums(bound)
+
+Returns a vector containing the sums of all proper divisors of `k` for `k ∈ 1:bound`.
+"""
+function generateDivisorSums(bound::Integer)
+
+    # generating primes
+    primes = generatePrimes(bound)
+
+    # creating relevant vectors
+    properDivisors = Vector{Set{Int}}()  # properDivisors[k] = vector of proper divisors of k
+    divisorSums = [nextProperDivisors(properDivisors, primes) |> sum for n in 1:bound]  
+        # divisorSums[k] = sum(properDivisors[k])
+
+    return divisorSums
 end
 
 # function call and benchmarking

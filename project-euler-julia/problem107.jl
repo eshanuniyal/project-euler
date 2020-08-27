@@ -6,18 +6,6 @@ using DelimitedFiles  # readdlm
 using DataStructures  # priority queue
 
 """
-    extractGraph(fileName)
-
-Returns an adjacency matrix representing a graph given in `fileName`.
-"""
-function extractGraph(fileName)
-    A = readdlm(fileName, ',', String, '\n',)  # adjacency matrix
-    n = size(A, 1)  # number of vertices
-    # creating adjacency matrix of integer weights; -1 indicates no edge between vertices
-    return [A[r, c] == "-" ? -1 : parse(Int, A[r, c]) for r in 1:n, c in 1:n]
-end
-
-"""
     minimumSpanningTree(fileName)
 
 Returns the maximum possible saving, using Prim's Algorithm, by removing edges from a 
@@ -68,6 +56,19 @@ function minimumSpanningTree(fileName)
 
     # returning savings
     return treeWeight - minTreeWeight
+end
+
+
+"""
+    extractGraph(fileName)
+
+Returns an adjacency matrix representing a graph given in `fileName`.
+"""
+function extractGraph(fileName)
+    A = readdlm(fileName, ',', String, '\n',)  # adjacency matrix
+    n = size(A, 1)  # number of vertices
+    # creating adjacency matrix of integer weights; -1 indicates no edge between vertices
+    return [A[r, c] == "-" ? -1 : parse(Int, A[r, c]) for r in 1:n, c in 1:n]
 end
 
 # function call and benchmarking

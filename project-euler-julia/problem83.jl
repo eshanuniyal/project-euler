@@ -6,67 +6,6 @@ using DelimitedFiles # readdlm
 using DataStructures # PriorityQueue
 
 """
-	Node
-
-# Fields
-- `r::Int`: number of row of Node
-- `c::Int`: number of column of Node
-- `val::Int`: value stored in node
-- `adjNodes::Vector{Int}`: vector of Nodes adjacent to Node
-- `shortestPath::Int`: shortest path to Node from top-left Node
-- `heuristic::Int`: Heuristic for shortest path from top-left Node to bottom-right Node through Node
-"""
-mutable struct Node
-	r::Int
-	c::Int
-	val::Int
-	adjNodes::Vector{Node}
-	shortestPath::Int
-	heuristic::Int
-end
-
-"""
-	generateNodeMatrix(numMatrix)
-
-Return a matrix of Nodes generated from matrix of integers `numMatrix`.
-"""
-function generateNodeMatrix(numMatrix::Matrix{Int})
-
-	nRows, nCols = first(size(numMatrix)), last(size(numMatrix))
-	nodeMatrix = Matrix{Node}(undef, nRows, nCols)
-
-	# defining heuristic
-	heuristic(r, c) = nCols - c + nRows - r
-
-	# setting up nodeMatrix
-	emptyAdjNodes::Vector{Node} = []
-	for r ∈ 1:nRows
-		for c ∈ 1:nCols
-			nodeMatrix[r, c] = Node(r, c, numMatrix[r, c], emptyAdjNodes, typemax(Int), heuristic(r, c))
-		end
-	end
-
-	# finding adjacent nodes
-	for r ∈ 1:nRows
-		for c ∈ 1:nCols
-			adjNodes::Vector{Node} = []
-			# pushing right node, if it exists
-			c + 1 ≤ nCols && push!(adjNodes, nodeMatrix[r, c + 1])
-			# pushing down node, if it exists
-			r + 1 ≤ nRows && push!(adjNodes, nodeMatrix[r + 1, c])
-			# pushing left node, if it exists
-			c - 1 ≥ 1 && push!(adjNodes, nodeMatrix[r, c - 1])
-			# pushing up node, if it exists
-			r - 1 ≥ 1 && push!(adjNodes, nodeMatrix[r - 1, c])
-			nodeMatrix[r, c].adjNodes = adjNodes
-		end
-	end
-
-	return nodeMatrix
-end
-
-
-"""
 	minPathSumTwoWays(fileName)
 
 Returns sum of the minimum path from the top-left element of a grid defined in `fileName` 
@@ -100,5 +39,63 @@ function minPathSumFourWays(fileName::String)
 	return nodeMatrix[end, end].shortestPath
 end
 
-# function call
-@btime minPathSumFourWays("Problem Resources\\problems81,82,83test.txt")
+
+"""
+	Node
+
+# Fields
+- `r::Int`: number of row of Node
+- `c::Int`: number of column of Node
+- `val::Int`: value stored in node
+- `adjNodes::Vector{Int}`: vector of Nodes adjacent to Node
+- `shortestPath::Int`: shortest path to Node from top-left Node
+- `heuristic::Int`: Heuristic for shortest path from top-left Node to bottom-right Node through Node
+"""
+mutable struct Node
+	r::Int
+	c::Int
+	val::Int
+	adjNodes::Vector{Node}
+	shortestPath::Int
+	heuristic::Int
+end
+
+
+"""
+	generateNodeMatrix(numMatrix)
+
+Return a matrix of Nodes generated from matrix of integers `numMatrix`.
+"""
+function generateNodeMatrix(numMatrix::Matrix{Int})
+
+	nRows, nCols = first(size(numMatrix)), last(size(numMatrix))
+	nodeMatrix = Matrix{Node}(undef, nRows, nCols)
+
+	# defining heuristic
+	heuristic(r, c) = nCols - c + nRows - r
+
+	# setting up nodeMatrix
+	emptyAdjNodes::Vector{Node} = []
+	for r ∈ 1:nRows, c ∈ 1:nCols
+		nodeMatrix[r, c] = Node(r, c, numMatrix[r, c], emptyAdjNodes, typemax(Int), heuristic(r, c))
+	end
+
+	# finding adjacent nodes
+	for r ∈ 1:nRows, c ∈ 1:nCols
+		adjNodes::Vector{Node} = []
+		# pushing right node, if it exists
+		c + 1 ≤ nCols && push!(adjNodes, nodeMatrix[r, c + 1])
+		# pushing down node, if it exists
+		r + 1 ≤ nRows && push!(adjNodes, nodeMatrix[r + 1, c])
+		# pushing left node, if it exists
+		c - 1 ≥ 1 && push!(adjNodes, nodeMatrix[r, c - 1])
+		# pushing up node, if it exists
+		r - 1 ≥ 1 && push!(adjNodes, nodeMatrix[r - 1, c])
+		nodeMatrix[r, c].adjNodes = adjNodes
+	end
+
+	return nodeMatrix
+end
+
+# function call and benchmarking
+@btime minPathSumFourWays("Problem Resources\\problems81,82,83.txt")

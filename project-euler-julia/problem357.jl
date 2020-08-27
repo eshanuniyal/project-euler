@@ -1,6 +1,6 @@
 # Julia Solution to Project Euler Problem 357
 # 25 August 2020
-# Runtime: ~4 seconds
+# Runtime: ~3 seconds
 
 import PrimeFunctions: generatePrimes
 
@@ -22,7 +22,7 @@ function checkNumber(n, primes, primesSet)
     """
     # return false if n ≠ 2k for any odd k
     n % 4 == 2 || return false
-    
+
     """ Checking if n is a prime generating integer """
     # iterating over factor pairs of number
     for k in 1:isqrt(n)
@@ -46,10 +46,9 @@ function primeGeneratingIntegersSum(bound)
     primes = generatePrimes(bound + 1)
     # creating set of primes for easy checking of primality
     primesSet = Set(primes)
-
     # optimisation: every prime-generating number n must be 1 less than a prime number, since
         # otherwise, n = n × 1 and n + 1 ∉ primes
-    return [p - 1 for p in primes if checkNumber(p - 1, primes, primesSet)] |> sum
+    return filter(p -> checkNumber(p - 1, primes, primesSet), primes) |> sum
 end
 
 # function call and benchmarking

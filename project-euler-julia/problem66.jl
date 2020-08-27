@@ -12,8 +12,7 @@ Return (non-perfect-square) integer `D` in `[2, bound]` such that the minimal so
 function diophantineEquation(bound::Integer)
 
 	# tracking max minimal solution found so far and the corresponding value of D
-	maxMinimalSolution = 0
-	optimalD = 0
+	maxMinimalSolution, optimalD = 0, 0
 
     # iterating over [2, D]
     for D in 2:bound
@@ -32,7 +31,7 @@ function diophantineEquation(bound::Integer)
 
     end 
 
-    return optimalD;
+    return optimalD
 end
 
 # function call and benchmark

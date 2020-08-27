@@ -5,27 +5,22 @@
 using DelimitedFiles  # readdlm
 
 """
-    extractMatrix(fileName)
+    matrixSum(fileName)
 
-Returns a matrix of numbers extracted from `fileName`, a .txt file where each row is separated 
-by newline characters and and distinct numbers in each row have space(s) between them.
+Returns the maximum possible sum of elements in a matrix defined in `fileName` such that 
+none of the selected  elements share the same row or column.
 """
-function extractMatrix(fileName)
-    
-    # reading in rows
-    matrixStr = readdlm(fileName, ' ', String, '\n')
-    # finding number of rows and columns (some columns include "")
-    rₙ, cₙ = size(matrixStr, 1), size(matrixStr, 2)
-    
-    # creating matrix to store numbers
-    matrix = fill(0, (rₙ, rₙ))
-    # inserting rows in matrix
-    for r in 1:rₙ
-        matrix[r, :] = [parse(Int, matrixStr[r, c]) for c in 1:cₙ if matrixStr[r, c] ≠ ""]
-    end
+function matrixSum(fileName)
 
-    return matrix
+    # extracting matrix
+    matrix = extractMatrix(fileName)
+    # creating dictionary to store maximal matrix sums
+    matrixSums = Dict{Matrix{Int}, Int}()
+
+    # returning maximal matrix sum
+    return findMaxMatrixSum(matrix, matrixSums)
 end
+
 
 """
     findMaxMatrixSum(M, matrixSums)
@@ -56,22 +51,30 @@ function findMaxMatrixSum(M, matrixSums)
     return max
 end
 
+
 """
-    matrixSum(fileName)
+    extractMatrix(fileName)
 
-Returns the maximum possible sum of elements in a matrix defined in `fileName` such that 
-none of the selected  elements share the same row or column.
+Returns a matrix of numbers extracted from `fileName`, a .txt file where each row is separated 
+by newline characters and and distinct numbers in each row have space(s) between them.
 """
-function matrixSum(fileName)
+function extractMatrix(fileName)
+    
+    # reading in rows
+    matrixStr = readdlm(fileName, ' ', String, '\n')
+    # finding number of rows and columns (some columns include "")
+    rₙ, cₙ = size(matrixStr, 1), size(matrixStr, 2)
+    
+    # creating matrix to store numbers
+    matrix = fill(0, (rₙ, rₙ))
+    # inserting rows in matrix
+    for r in 1:rₙ
+        matrix[r, :] = [parse(Int, matrixStr[r, c]) for c in 1:cₙ if matrixStr[r, c] ≠ ""]
+    end
 
-    # extracting matrix
-    matrix = extractMatrix(fileName)
-    # creating dictionary to store maximal matrix sums
-    matrixSums = Dict{Matrix{Int}, Int}()
-
-    # returning maximal matrix sum
-    return findMaxMatrixSum(matrix, matrixSums)
+    return matrix
 end
+
 
 # function call and benchmarking
 @btime matrixSum("Problem Resources/problem345.txt")

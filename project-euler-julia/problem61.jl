@@ -2,63 +2,6 @@
 # 6 August 2020
 # Runtime: ~10⁻³ seconds
 
-"""
-    figurate(n, k)
-
-Return the `n`th figurate/polygonal number of sides `k` for `k` ∈ [3,8].
-"""
-function figurate(n::Integer, k::Integer)
-    k == 3 && return (n * (n + 1)) ÷ 2
-    k == 4 && return  n * n
-    k == 5 && return (n * (3n - 1)) ÷ 2
-    k == 6 && return  n * (2n - 1)
-    k == 7 && return (n * (5n - 3)) ÷ 2
-    k == 8 && return  n * (3n - 2)
-    # k not in valid range [3, 8]: throw error
-    throw(ArgumentError("k = $k out of bounds; required k ∈ [3, 8]."))
-end
-
-"""
-    findOrderedSet(usedNums, usedSides, numbers)
-
-Returns the longest possible extension of `usedNums` that does not repeat sides and is cyclic
-(except, possibly, from the last number to the first number)
-
-# Parameter list
-- `usedNums::Vector{Int}`: a vector of used integers in cyclic order
-- `usedSides::Vector{Int}`: a vector of the number of sides of each (figurate) number in `usedNums`
-- `numbers::Matrix{Set{Int}}`: a matrix of pre-generated polygonal numbers, 
-    where `numbers[i, j]` is a set of four-digit figurate numbers of number of sides `i` with first two digits `j`
-"""
-function findOrderedSet(usedNums::Vector{Int}, usedSides::Vector{Bool}, numbers::Matrix{Set{Int}})::Vector{Int}
-
-    # finding starting digits of next number
-    nextNumStart = last(usedNums) % 100
-    # easy check fr whether next number exists
-    if nextNumStart < 10
-        return usedNums
-    end
-
-    # iterating over unused sides
-    for k in findall(x -> !x, usedSides)
-        # iterating over possible numbers
-        for num in numbers[k, nextNumStart]
-            # creating copies of usedNums and usedSides for recursive function call
-            nextUsedNums = copy(usedNums); nextUsedSides = copy(usedSides)
-            push!(nextUsedNums, num); nextUsedSides[k] = true
-            # searching for longest ordered set with current numbers
-            fullSet = findOrderedSet(nextUsedNums, nextUsedSides, numbers)
-            # testing if the set has length 6 and if the last element is cyclic with the first
-            if length(fullSet) == 6 && last(fullSet) % 100 == first(fullSet) ÷ 100
-                # this return cascades through the function calls
-                return fullSet
-            end
-        end
-    end
-
-    return usedNums
-
-end
 
 """
     findOrderedSetSum()
@@ -108,6 +51,65 @@ function findOrderedSetSum()
             return sum(set)
         end
     end
+end
+
+
+"""
+    findOrderedSet(usedNums, usedSides, numbers)
+
+Returns the longest possible extension of `usedNums` that does not repeat sides and is cyclic
+(except, possibly, from the last number to the first number)
+
+# Parameter list
+- `usedNums::Vector{Int}`: a vector of used integers in cyclic order
+- `usedSides::Vector{Int}`: a vector of the number of sides of each (figurate) number in `usedNums`
+- `numbers::Matrix{Set{Int}}`: a matrix of pre-generated polygonal numbers, 
+    where `numbers[i, j]` is a set of four-digit figurate numbers of number of sides `i` with first two digits `j`
+"""
+function findOrderedSet(usedNums::Vector{Int}, usedSides::Vector{Bool}, numbers::Matrix{Set{Int}})::Vector{Int}
+
+    # finding starting digits of next number
+    nextNumStart = last(usedNums) % 100
+    # easy check fr whether next number exists
+    if nextNumStart < 10
+        return usedNums
+    end
+
+    # iterating over unused sides
+    for k in findall(x -> !x, usedSides)
+        # iterating over possible numbers
+        for num in numbers[k, nextNumStart]
+            # creating copies of usedNums and usedSides for recursive function call
+            nextUsedNums = copy(usedNums); nextUsedSides = copy(usedSides)
+            push!(nextUsedNums, num); nextUsedSides[k] = true
+            # searching for longest ordered set with current numbers
+            fullSet = findOrderedSet(nextUsedNums, nextUsedSides, numbers)
+            # testing if the set has length 6 and if the last element is cyclic with the first
+            if length(fullSet) == 6 && last(fullSet) % 100 == first(fullSet) ÷ 100
+                # this return cascades through the function calls
+                return fullSet
+            end
+        end
+    end
+
+    return usedNums
+end
+
+
+"""
+    figurate(n, k)
+
+Return the `n`th figurate/polygonal number of sides `k` for `k` ∈ [3,8].
+"""
+function figurate(n::Integer, k::Integer)
+    k == 3 && return (n * (n + 1)) ÷ 2
+    k == 4 && return  n * n
+    k == 5 && return (n * (3n - 1)) ÷ 2
+    k == 6 && return  n * (2n - 1)
+    k == 7 && return (n * (5n - 3)) ÷ 2
+    k == 8 && return  n * (3n - 2)
+    # k not in valid range [3, 8]: throw error
+    throw(ArgumentError("k = $k out of bounds; required k ∈ [3, 8]."))
 end
 
 # function call and benchmarking

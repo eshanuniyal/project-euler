@@ -4,12 +4,48 @@
 
 using DelimitedFiles # readdlm
 
+"""
+	minPathSumTwoWays(fileName)
+
+Returns sum of the minimum path from the top-left element of a grid defined in `fileName` 
+to the bottom-right element moving only up, down, and right.
+"""
+function minPathSumThreeWays(fileName::String)::Int
+
+    # extracting matrix
+    matrix::Matrix{Int} = readdlm(fileName, ',', Int, '\n')
+	rₙ, cₙ = first(size(matrix)), last(size(matrix))
+	# defining minPathSums matrices
+	minPathSums = Array{Union{Int, Nothing}, 3}(nothing, 2, rₙ, cₙ)
+		# minPathSums[UP, i, j] stores min path going up/right for i ≠ 1
+		# minPathSums[DOWN, i, j] stores min path going down/right for i ≠ first(size(matrix))
+	
+	# setting base case: minimum path from element in last row to itself is the element itself
+	for sr ∈ 1:rₙ
+		minPathSums[UP, sr, end] = matrix[sr, end]
+		minPathSums[DOWN, sr, end] = matrix[sr, end]
+	end
+
+	# finding minimal path from each starting index in first column
+	bestMinPathSum = typemax(Int)	# sentinel
+	# iterating over rows
+	for sr ∈ 1:rₙ
+		# finding min path sum from (sr, 1)
+		currentMinPathSum = minPathSum(sr, 1, RIGHT, matrix, minPathSums)
+		currentMinPathSum < bestMinPathSum && (bestMinPathSum = currentMinPathSum)
+	end
+
+	return bestMinPathSum
+end
+
+
 # creating enumeration for directions
 @enum Direction begin
 	UP = 1;	DOWN = 2; RIGHT = 3
 end
 
 Base.to_index(dir::Direction)::Int = Int(dir)
+
 
 """
 	minPathSum(sr, sc, dir, matrix, minPathSums)
@@ -28,12 +64,9 @@ Recursive function which returns the sum of the minimal path from `matrix[sr, sc
 function minPathSum(sr::Int, sc::Int, dir::Direction, matrix::Matrix{Int},  minPathSums::Array{Union{Nothing, Int}, 3})
 
 	# base case: can travel in any direction, and already found minimal path in any direction
-	if dir == RIGHT && nothing ∉ minPathSums[:, sr, sc]
-		return minimum(minPathSums[:, sr, sc])
+	dir == RIGHT && nothing ∉ minPathSums[:, sr, sc] && return minimum(minPathSums[:, sr, sc])
 	# base case: travel is limited to two directions (up/right or down/right) and already found minimal path up/down
-	elseif dir ≠ RIGHT && minPathSums[dir, sr, sc] ≠ nothing
-        return minPathSums[dir, sr, sc]
-	end
+	dir ≠ RIGHT && minPathSums[dir, sr, sc] ≠ nothing && return minPathSums[dir, sr, sc]
 
     # not at end point -> find minimal path from right element and below element (if they exist)
 	paths = fill(typemax(Int), 3)
@@ -69,44 +102,7 @@ function minPathSum(sr::Int, sc::Int, dir::Direction, matrix::Matrix{Int},  minP
 	# at this point, all paths have either been found or don't exist (in which case, paths[dir] = typemax(Int))
 	# returning minimal path
 	return minimum(paths)
-
 end
-
-"""
-	minPathSumTwoWays(fileName)
-
-Returns sum of the minimum path from the top-left element of a grid defined in `fileName` 
-to the bottom-right element moving only up, down, and right.
-"""
-function minPathSumThreeWays(fileName::String)::Int
-
-    # extracting matrix
-    matrix::Matrix{Int} = readdlm(fileName, ',', Int, '\n')
-	nRows, nCols = first(size(matrix)), last(size(matrix))
-	# defining minPathSums matrices
-	minPathSums = Array{Union{Int, Nothing}, 3}(nothing, 2, nRows, nCols)
-		# minPathSums[UP, i, j] stores min path going up/right for i ≠ 1
-		# minPathSums[DOWN, i, j] stores min path going down/right for i ≠ first(size(matrix))
-	# setting base case: minimum path from element in last row to itself is the element itself
-	for sr ∈ 1:nRows
-		minPathSums[UP, sr, end] = matrix[sr, end]
-		minPathSums[DOWN, sr, end] = matrix[sr, end]
-	end
-
-	# finding minimal path from each starting index in first column
-	bestMinPathSum = typemax(Int)	# sentinel
-	# iterating over rows
-	for sr ∈ 1:nRows
-		# finding min path sum from (sr, 1)
-		currentMinPathSum = minPathSum(sr, 1, RIGHT, matrix, minPathSums)
-		if (currentMinPathSum < bestMinPathSum)
-			bestMinPathSum = currentMinPathSum
-		end
-	end
-
-	return bestMinPathSum
-end
-
 
 # function call and benchmarking
 @btime minPathSumThreeWays("Problem Resources\\problems81,82,83.txt")
