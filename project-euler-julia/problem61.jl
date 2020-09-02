@@ -41,7 +41,7 @@ function findOrderedSetSum()
         # creating usedNums vector
         usedNums::Vector{Int} = [num]
         # creating usedSides vector
-        usedSides::Vector{Bool} = append!(fill(true, 3), fill(false, 5))
+        usedSides::BitArray{1} = append!(trues(3), falses(5))
             # usedSides[k] = true if a number with sides k has been used
                 # first three are therefore initialised as true, last five as false
         # find longest set that can be constructed with starting number num
@@ -62,11 +62,11 @@ Returns the longest possible extension of `usedNums` that does not repeat sides 
 
 # Parameter list
 - `usedNums::Vector{Int}`: a vector of used integers in cyclic order
-- `usedSides::Vector{Int}`: a vector of the number of sides of each (figurate) number in `usedNums`
+- `usedSides::BitArray{1}`: a vector representing which sides are already used corresponding to numbers in `usedNums` 
 - `numbers::Matrix{Set{Int}}`: a matrix of pre-generated polygonal numbers, 
     where `numbers[i, j]` is a set of four-digit figurate numbers of number of sides `i` with first two digits `j`
 """
-function findOrderedSet(usedNums::Vector{Int}, usedSides::Vector{Bool}, numbers::Matrix{Set{Int}})::Vector{Int}
+function findOrderedSet(usedNums::Vector{Int}, usedSides::BitArray{1}, numbers::Matrix{Set{Int}})::Vector{Int}
 
     # finding starting digits of next number
     nextNumStart = last(usedNums) % 100
