@@ -10,7 +10,7 @@ My solutions to some Project Euler problems.
 ## Recent Problems
 | # | Name | Solution | Date |
 | :---: | :--- | :--- | :--- |
-| 135 | Prize Strings | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem135.jl) | 31 August, 2020 |
+| 135 | Same differences | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem135.jl) | 31 August, 2020 |
 | 191 | Prize Strings | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem191.jl) | 27 August, 2020 |
 | 179 | Consecutive proper divisors | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem179.jl) | 26 August, 2020 |
 | 187 | Semiprimes | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem187.jl) | 26 August, 2020 |
@@ -137,7 +137,7 @@ My solutions to some Project Euler problems.
 | 120 | Square remainders | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_120.py) |
 | 123 | Prime square remainders | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_123.py) |
 | 124 | Ordered radicals | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_124.py) |
-| 135 | Prize Strings | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem135.jl) |
+| 135 | Same differences | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem135.jl) |
 | 145 | Reversible numbers | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_145.py) |
 | 149 | Maximum-sum subsequence | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_149.py) |
 | 179 | Consecutive proper divisors | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem179.jl) |
