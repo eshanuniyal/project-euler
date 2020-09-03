@@ -1,4 +1,4 @@
-# Julia Solution to Project Euler Problem 135
+# Julia Solution to Project Euler Problem 162
 # 2 September 2020
 # Runtime: 10⁻⁴ seconds
 # Solution based on solution to Problem 191
