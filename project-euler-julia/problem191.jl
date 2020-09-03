@@ -2,8 +2,6 @@
 # 27 August 2020
 # Runtime: ~10⁻⁵ seconds
 
-using Combinatorics
-
 """
     prizeStrings(ndays)
 
