@@ -6,10 +6,11 @@ My solutions to some Project Euler problems.
 
 **C++**: Problems 64, 66, 81, 82, 83
 
-**Julia**: Problems 1, 2, 61, 64, 66, 81, 82, 83, 88, 90, 93, 94, 95, 96, 101, 104, 107, 135, 179, 187, 191, 203, 205, 345, 357
+**Julia**: Problems 1, 2, 61, 64, 66, 81, 82, 83, 88, 90, 93, 94, 95, 96, 101, 104, 107, 135, 162, 179, 187, 191, 203, 205, 345, 357
 ## Recent Problems
 | # | Name | Solution | Date |
 | :---: | :--- | :--- | :--- |
+| 162 | Hexadecimal numbers | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem162.jl) | 2 September, 2020 |
 | 135 | Same differences | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem135.jl) | 31 August, 2020 |
 | 191 | Prize Strings | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem191.jl) | 27 August, 2020 |
 | 179 | Consecutive proper divisors | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem179.jl) | 26 August, 2020 |
@@ -140,6 +141,7 @@ My solutions to some Project Euler problems.
 | 135 | Same differences | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem135.jl) |
 | 145 | Reversible numbers | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_145.py) |
 | 149 | Maximum-sum subsequence | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_149.py) |
+| 162 | Hexadecimal numbers | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem162.jl) |
 | 179 | Consecutive proper divisors | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem179.jl) |
 | 187 | Semiprimes | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem187.jl) |
 | 191 | Prize Strings | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem191.jl) |
