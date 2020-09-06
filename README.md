@@ -6,10 +6,11 @@ My solutions to some Project Euler problems.
 
 **C++**: Problems 64, 66, 81, 82, 83
 
-**Julia**: Problems 1, 2, 61, 64, 66, 81, 82, 83, 88, 90, 93, 94, 95, 96, 101, 104, 107, 135, 162, 179, 187, 191, 203, 205, 345, 357
+**Julia**: Problems 1, 2, 61, 64, 66, 81, 82, 83, 88, 90, 93, 94, 95, 96, 101, 104, 107, 108, 135, 162, 179, 187, 191, 203, 205, 345, 357
 ## Recent Problems
 | # | Name | Solution | Date |
 | :---: | :--- | :--- | :--- |
+| 108 | Diophantine reciprocals I | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem108.jl) | 6 September, 2020 |
 | 162 | Hexadecimal numbers | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem162.jl) | 2 September, 2020 |
 | 135 | Same differences | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem135.jl) | 31 August, 2020 |
 | 191 | Prize Strings | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem191.jl) | 27 August, 2020 |
@@ -133,6 +134,7 @@ My solutions to some Project Euler problems.
 | 102 | Triangle containment | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_102.py) |
 | 104 | Pandigital Fibonacci ends | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem104.jl) |
 | 107 | Minimal network | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem107.jl) |
+| 108 | Diophantine reciprocals I | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem108.jl) |
 | 112 | Bouncy numbers | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_112.py) |
 | 119 | Digit power sum | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_119.py) |
 | 120 | Square remainders | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_120.py) |
