@@ -8,13 +8,13 @@ using SymEngine  # symbolic mathematics
 
 Return a vector representing a block of constants that repeats indefinitely in the continued fraction of root of integer `num`.
 """
-function findContinuedFraction(num::Integer)
+function findContinuedFraction(num::T) where T <: Integer
 
     # if num is a perfect square, return empty continued fraction
-    isqrt(num)^2 == num && return Vector{Int}()
+    isqrt(num)^2 == num && return Vector{T}()
 
     # sequence of a's (until sequence starts repeating)
-    fractionConstants = Vector{Int}()
+    fractionConstants = Vector{T}()
 
     # first constant
     aStart = isqrt(num)
@@ -48,9 +48,9 @@ end
 
 Return minimal `x` such that `x` solves Pell's equation `x² - Dy² = 1` for some `y` given integer `D`
 """
-function findMinimalPellSolution(D::Integer) 
+function findMinimalPellSolution(D::T) where T <: Integer 
     
-	continuedFraction::Vector{Int} = findContinuedFraction(D)
+	continuedFraction::Vector{T} = findContinuedFraction(D)
         # constants in continued fraction of root D (assumed D is not a square)
     period = length(continuedFraction)
 
@@ -77,14 +77,76 @@ function findMinimalPellSolution(D::Integer)
 end
 
 """
+    primeFactorisation(n, primes, primesSet)
+
+Returns a dictionary representing the prime factorisation of `n` (each key a prime factor, associated value its multiplicity) given `primes` and `primesSet`, an ordered vector and (optional) set of prime numbers respectively.
+"""
+function primeFactorisation(n::T, primes::Vector{T}, primesSet = Set{T}()) where T <: Integer
+
+    # base case: 1 has no prime factorisation
+    n == 1 && return Dict{T, T}()
+
+    # ensuring sufficient primes (assuming ordered) have been generated
+    while n > (isempty(primes) ? 0 : last(primes))
+        insertNextPrime(primes)
+        push!(primesSet, primes[end])
+    end
+
+    # base case: n is prime, prime factorisation is n : 1
+    n ∈ primesSet && return Dict(n => 1)
+
+    nFactorisation = Dict{T, T}()
+
+    # iterating over primes
+    for p in primes
+        # checking if p divides n
+        if n % p == 0
+            # finding geometric multiplicity of p in prime factorisation of n
+            nFactorisation[p] = 0
+            while n % p == 0
+                n ÷= p
+                nFactorisation[p] += 1
+            end
+            # n is fully reduced -> return pFactorisation
+            n == 1 && return nFactorisation
+            # optimisation: n is now prime, cannot be reduced further
+            if n ∈ primesSet
+                nFactorisation[n] = 1
+                return nFactorisation
+            end
+        end
+    end
+end
+
+"""
+    divisorCount(n, primes, primesSet)
+
+Return the number of divisors of `n` given `primes` and `primesSet`, an ordered vector and (optional) set of prime numbers respectively.
+"""
+function divisorCount(n, primes::Vector{T}, primesSet = Set{T}()) where T <: Integer
+    
+    # base case: 1 has only one divisor
+    n == 1 && return 1
+
+    # ensuring sufficient primes (assuming ordered) have been generated
+    while n > (isempty(primes) ? 0 : last(primes))
+        insertNextPrime(primes)
+        push!(primesSet, primes[end])
+    end
+
+    nFactorisation = primeFactorisation(n, primes, primesSet)
+
+    return ([m + 1 for m in values(nFactorisation)] |> prod)
+
+end
+"""
     nextProperDivisors(divisors, primes)
 
-Given `divisors`, a Vector{Set{Int}} of length `n - 1` such that `divisors[k]` is a 
+Given `divisors`, a Vector{Set{T}} of length `n - 1` such that `divisors[k]` is a 
 set of all proper divisors of `k`, and `primes`, an ordered vector of prime numbers, 
 inserts set of proper divisors of `n` at index `n` and returns the same.
 """
-function nextProperDivisors(divisors::Vector{Set{Int}}, primes::Vector{Int}, 
-    primesSet = Set{Int}())::Set{Int}
+function nextProperDivisors(divisors::Vector{Set{T}}, primes::Vector{T}, primesSet = Set{T}()) where T <: Integer
 
     n = length(divisors) + 1
 
@@ -96,6 +158,7 @@ function nextProperDivisors(divisors::Vector{Set{Int}}, primes::Vector{Int},
     # ensuring sufficient primes (assuming ordered) have been generated
     while nRoot > (isempty(primes) ? 0 : last(primes))
         insertNextPrime(primes)
+        push!(primesSet, primes[end])
     end
 
     # base case: n is prime, only proper divisor is 1 (this is useful if primesSet is given)
@@ -121,29 +184,28 @@ end
 """
     nextFactorisations(divisors, primes)
 
-Given `factorisations`, a Vector{Set{Vector{Int}}} of length `n - 1` such that `factorisations[k]` 
+Given `factorisations`, a Vector{Set{Vector{T}}} of length `n - 1` such that `factorisations[k]` 
 is a set of all (ordered) factorisations of `k`, and `primes`, an ordered vector of prime numbers, 
 inserts and returns a set of ordered factorisations of `n` at index `n`.
 """
-function nextFactorisations(fs::Vector{Set{Vector{Int}}}, primes::Vector{Int}, 
-    primesSet::Set{Int} = Set{Int}())::Set{Vector{Int}}
+function nextFactorisations(fs::Vector{Set{Vector{T}}}, primes::Vector{T}, primesSet = Set{T}()) where T <: Integer
 
     # finding n (number for which factorisations have to be generated)
     n = length(fs) + 1 
     
     # base case: 1 has no "proper" factorisations
-    n == 1 && return push!(fs, Set{Vector{Int}}())[end]
+    n == 1 && return push!(fs, Set{Vector{T}}())[end]
 
     nRoot = isqrt(n)  # root(n)
 
     # ensuring sufficient primes (assuming ordered) have been generated
     while nRoot > (isempty(primes) ? 0 : last(primes))
         insertNextPrime(primes)
+        push!(primesSet, primes[end])
     end
     
     # base case: n is prime, only factorisation is [1, n] (this is useful if primesSet is given)
     n ∈ primesSet && return push!(fs, Set([[n]]))[end]
-
 
     # iterating over primes
     for p in primes
@@ -151,7 +213,7 @@ function nextFactorisations(fs::Vector{Set{Vector{Int}}}, primes::Vector{Int},
         p > nRoot && break
         # checking if p divides n
         if n % p == 0
-            fₙ = Set{Vector{Int}}()  # set to store ordered factorisations of n
+            fₙ = Set{Vector{T}}()  # set to store ordered factorisations of n
             # iterating over factorisations of largest factor of n
             for f in fs[n ÷ p]
                 # appending p gives a factorisation of n
@@ -173,30 +235,28 @@ function nextFactorisations(fs::Vector{Set{Vector{Int}}}, primes::Vector{Int},
 end
 
 """
-    nextPrimeFactorisation(dCounts, primes, primesSet)
+    nextPrimeFactorisation(fs, primes, primesSet)
 
-Inserts into `fs` a dictionary representing the prime factorisation of `n` and returns the same, where 
-`fs` is a vector of length `n - 1` such that `dCounts[k]` is a dictionary representing the prime factorisation 
-of `k`, and `primes` and `primesSet` are an ordered vector and set of prime numbers respectively.
+Inserts into `fs` a dictionary representing the prime factorisation of `n` and returns the same, where `fs` is a vector of length `n - 1` such that `dCounts[k]` is a dictionary representing the prime factorisation of `k`, and `primes` and `primesSet` are an ordered vector and set of prime numbers respectively.
 """
-function nextPrimeFactorisation(fs::Vector{Dict{Integer, Integer}}, 
-    primes::Vector{Integer}, primesSet::Set{Integer})::Dict{Integer, Integer}
+function nextPrimeFactorisation(fs::Vector{Dict{T, T}}, primes::Vector{T}, primesSet::Set{T}) where T <: Integer
 
     # finding n, the number for which we need to find a prime factorisation
     n = length(fs) + 1
 
     # base case: n = 1, no prime factorisation
-    n == 1 && return push!(fs, Dict{Int, Int}())[end]
+    n == 1 && return push!(fs, Dict{T, T}())[end]
 
     nRoot = isqrt(n)  # root(n)
 
     # ensuring sufficient primes (assuming ordered) have been generated
     while nRoot > (isempty(primes) ? 0 : last(primes))
         insertNextPrime(primes)
+        push!(primesSet, primes[end])
     end
 
     # base case: n is prime, prime factorisation is simply (n => 1)
-    n ∈ primesSet && return push!(fs, Dict(n => 1))[end]
+    n ∈ primesSet && return push!(fs, Dict{T, T}(n => 1))[end]
     
     # iterating over primes to find smallest prime factor
     for p in primes
@@ -209,6 +269,9 @@ function nextPrimeFactorisation(fs::Vector{Dict{Integer, Integer}},
             return push!(fs, fₙ)[end]
         end
     end
+
+    # no prime factor -> n is prime
+    return push!(fs, Dict{T, T}(n => 1))[end]
 end
 
 """
@@ -218,7 +281,7 @@ Inserts into `dCounts` the number of divisors of `n` and returns the same where 
 `n - 1` such that `dCounts[k]` is the number of divisors of `k`, and `primes` and `primesSet` are an ordered vector 
 and set of prime numbers respectively.
 """
-function nextDivisorCount(dCounts::Vector{Int}, primes::Vector{Int}, primesSet::Set{Int})::Integer
+function nextDivisorCount(dCounts::Vector{T}, primes::Vector{T}, primesSet::Set{T})::T where T <: Integer
 
     # finding n, the number for which we need to find the number of positive divisors
     n = length(dCounts) + 1
@@ -231,6 +294,7 @@ function nextDivisorCount(dCounts::Vector{Int}, primes::Vector{Int}, primesSet::
     # ensuring sufficient primes (assuming ordered) have been generated
     while nRoot > (isempty(primes) ? 0 : last(primes))
         insertNextPrime(primes)
+        push!(primesSet, primes[end])
     end
 
     # base case: n is prime, only two proper divisors
@@ -255,7 +319,7 @@ function nextDivisorCount(dCounts::Vector{Int}, primes::Vector{Int}, primesSet::
             # finding number of divisors of n and updating dCounts
             return push!(dCounts, dCounts[k] ÷ t * (t + 1))[end]
         end
-    end 
+    end
 end
 
 
