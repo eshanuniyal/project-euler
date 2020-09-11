@@ -29,7 +29,7 @@ function findMinimalReciprocal(nSols)
     primes, primesSet = Vector{Int}(), Set{Int}()
 
     # function to find number of factor pairs of n²
-    squareFactorPairs(n) = ([2m + 1 for m in values(pfs[n])] |> prod) ÷ 2
+    squareFactorPairs(n) = (([2m + 1 for m in values(pfs[n])] |> prod) + 1) ÷ 2
         # number of divisors of a number is given by the product over 2m + 1 where m is the multiplicity of its prime factors
 
     # iterating from n = 2 (n = 1 has only one proper divisor)
