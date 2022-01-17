@@ -6,10 +6,17 @@ My solutions to some Project Euler problems.
 
 **C++**: Problems 64, 66, 81, 82, 83
 
-**Julia**: Problems 1, 2, 61, 64, 66, 81, 82, 83, 88, 90, 93, 94, 95, 96, 101, 104, 107, 108, 135, 162, 179, 187, 191, 203, 205, 345, 357
+**Julia**: Problems 1, 2, 61, 64, 66, 81, 82, 83, 88, 90, 93, 94, 95, 96, 101, 104, 107, 108, 135, 162, 179, 187, 191, 203, 205, 345, 357, 387, 685, 686, 700, 719, 751
+
 ## Recent Problems
 | # | Name | Solution | Date |
 | :---: | :--- | :--- | :--- |
+| 387 | Concatenation Coincidence | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem387.jl) | 26 December, 2021 |
+| 751 | Concatenation Coincidence | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem751.jl) | 23 December, 2021 |
+| 719 | Number Splitting | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem719.jl) | 2 December, 2021 |
+| 700 | Eulercoin | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem700.jl) | 30 November, 2021 |
+| 686 | Powers of Two | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem686.jl) | 29 November, 2021 |
+| 684 | Inverse Digit Sum | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem684.jl) | 29 November, 2021 |
 | 108 | Diophantine reciprocals I | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem108.jl) | 6 September, 2020 |
 | 162 | Hexadecimal numbers | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem162.jl) | 2 September, 2020 |
 | 135 | Same differences | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem135.jl) | 31 August, 2020 |
