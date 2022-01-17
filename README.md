@@ -160,3 +160,8 @@ My solutions to some Project Euler problems.
 | 345 | Matrix sum | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem345.jl) |
 | 347 | Largest integer divisible by two primes | [Python](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-python/problem_347.py) |
 | 357 | Prime generating integers | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem357.jl) |
+| 684 | Inverse Digit Sum | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem684.jl) | 29 November, 2021 |
+| 686 | Powers of Two | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem686.jl) | 29 November, 2021 |
+| 700 | Eulercoin | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem700.jl) | 30 November, 2021 |
+| 719 | Number Splitting | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem719.jl) | 2 December, 2021 |
+| 751 | Concatenation Coincidence | [Julia](https://github.com/eshanuniyal/project-euler/blob/master/project-euler-julia/problem751.jl) | 23 December, 2021 |
