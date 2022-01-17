@@ -1,6 +1,3 @@
-using DataStructures   # LinkedLists
-import Base.delete!
-
 module PrimeFunctions
 using TimerOutputs
 
@@ -35,9 +32,7 @@ function sieve(bound::Integer)
             # inserting in primes
             push!(primes, i)
             # sieving multiples
-            for j in i^2:i:bound
-                numbers[j] = false
-            end
+            numbers[i^2:i:bound] .= false
         end
     end
 
@@ -74,9 +69,7 @@ function segmentedSieve(bound::Integer)
             p > sₘroot && break
             minMultₚ = (sₗ ÷ p)p
             minMultₚ ≤ sₗ && (minMultₚ += p)
-            for pMult in minMultₚ : p : sₘ
-                isPrimeArr[pMult - sₗ] = false
-            end
+            isPrimeArr[minMultₚ - sₗ : p : sₘ - sₗ] .= false
         end
 
         for k in 1 : sₘ - sₗ
